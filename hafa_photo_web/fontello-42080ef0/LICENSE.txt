@@ -1,13 +1,13 @@
 Font license info
 
 
-## Font Awesome
+## Linecons
 
-   Copyright (C) 2016 by Dave Gandy
+   Copyright (C) 2013 by Designmodo
 
-   Author:    Dave Gandy
-   License:   SIL ()
-   Homepage:  http://fortawesome.github.com/Font-Awesome/
+   Author:    Designmodo for Smashing Magazine
+   License:   CC BY ()
+   Homepage:  http://designmodo.com/linecons-free/
 
 
 ## MFG Labs

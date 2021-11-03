@@ -4,10 +4,60 @@
 #wrapper>*{
   border:5px solid green;
 }
-#wrapper>*>*{
+/* #wrapper>*>*{
   border:5px solid blue;
-}
+} */
 body{
   background-image: url(../../images/bg.jpg);
-  background-size: cover;
+  background-size:cover;
+}
+#header{
+  text-align: center;
+  padding-top:2rem;
+  padding-bottom: 2rem;
+}
+header .avatar {
+  border-radius: 100%;
+  display:inline-block;
+  padding:0.5rem;
+  border:1px solid rgba(255,255,255,0.25);
+  background-color: rgba(255,255,255,0.05);
+  margin-bottom: 1.5rem;
+}
+#header .avatar img{
+  border-radius: 100%;
+  display:block;
+}
+#header h1{
+  fong-size:1rem;
+  color:rgba(255,255,255,0.5);
+  font-weight: 200;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-bottom: 1.5rem;
+}
+#header h1 strong{
+  color:white;
+  border-bottom: 1px dotted rgba(255,255,255,0.5);
+  font-weight: 200;
+}
+#header ul.icons li{
+  display: inline-block;
+  border-radius: 100%;
+  border: 1px solid rgba(255,255,255,0.25);
+  background-color: rgba(255,255,255,0.05);
+  width:1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-right : 1rem;
+}
+#header ul.icons li a{
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+}
+#header ul.icons li .label{
+  display: none;
+
 }
