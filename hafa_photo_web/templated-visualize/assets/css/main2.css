@@ -29,11 +29,11 @@ header .avatar {
   display:block;
 }
 #header h1{
-  fong-size:1rem;
   color:rgba(255,255,255,0.5);
   font-weight: 200;
   font-family: 'Source Sans Pro', sans-serif;
   margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 #header h1 strong{
   color:white;
@@ -44,7 +44,7 @@ header .avatar {
   display: inline-block;
   border-radius: 100%;
   border: 1px solid rgba(255,255,255,0.25);
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255,255,255,0.03);
   width:1.5rem;
   height: 1.5rem;
   display: inline-flex;
@@ -54,10 +54,40 @@ header .avatar {
   margin-right : 1rem;
 }
 #header ul.icons li a{
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.3);
   text-decoration: none;
 }
 #header ul.icons li .label{
   display: none;
-
+}
+#main .thumbnails {
+  display: flex;
+}
+#main .thumbnails a{
+  margin-bottom:1.5rem;
+  display:block;
+}
+#main .thumbnails>div {
+  flex-grow: 1;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+#main .thumbnails img{
+  width : 100%;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  display: block;
+}
+#main .thumbnails h3{
+  border-left: 1px solid rgba(255,255,255,0.3);
+  border-right: 1px solid rgba(255,255,255,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  padding:0.5rem;
+  text-align: center;
+  background-color: rgba(255,255,255,0.1);
+  color:white;
+  font-size:0.9rem;
+  font-weight: 200;
 }
