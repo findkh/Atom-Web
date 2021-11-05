@@ -1,15 +1,19 @@
-#wrapper{
+/* #wrapper{
   border:5px solid red;
 }
 #wrapper>*{
   border:5px solid green;
-}
+} */
 /* #wrapper>*>*{
   border:5px solid blue;
 } */
 body{
   background-image: url(../../images/bg.jpg);
   background-size:cover;
+}
+#wrapper{
+  max-width:68rem;
+  margin:5rem auto;
 }
 #header{
   text-align: center;
@@ -34,6 +38,7 @@ header .avatar {
   font-family: 'Source Sans Pro', sans-serif;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  line-height: 2rem;
 }
 #header h1 strong{
   color:white;
@@ -44,18 +49,24 @@ header .avatar {
   display: inline-block;
   border-radius: 100%;
   border: 1px solid rgba(255,255,255,0.25);
-  background-color: rgba(255,255,255,0.03);
-  width:1.5rem;
-  height: 1.5rem;
+  background-color: rgba(255,255,255,0.05);
+  width:2rem;
+  height: 2rem;
   display: inline-flex;
   justify-content: center;
-  align-content: center;
   align-items: center;
   margin-right : 1rem;
 }
+header ul.icons li:hover{
+  border: 1px solid rgba(255,255,255,0.25);
+  background-color: rgba(255,255,255,0.2);
+}
 #header ul.icons li a{
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.2);
   text-decoration: none;
+}
+#header ul.icons li a:before{
+  font-size:1.5rem;
 }
 #header ul.icons li .label{
   display: none;
@@ -90,4 +101,29 @@ header .avatar {
   color:white;
   font-size:0.9rem;
   font-weight: 200;
+}
+#footer{
+  text-align: center;
+  color:rgba(255,255,255,0.5);
+  font-weight: 200;
+  padding-bottom: 3rem;
+  font-size:0.8rem;
+}
+#footer a{
+  color:rgba(255,255,255,0.5);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(255,255,255,0.5);
+}
+#footer::before{
+  content: '';
+  display: block;
+  margin:2rem auto;
+  width:10rem;
+  border-top:1px solid rgba(255,255,255,0.5);
+  margin-bottom: 3rem;
+}
+@media(max-width:480px){
+  #main .thumbnails {
+    display: block;
+  }
 }
