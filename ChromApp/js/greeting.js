@@ -13,7 +13,6 @@ if(savedUsername === null) { //username이 null이라면
     loginForm.addEventListener("submit", onLoginSubmit);
 } else { //localStorage에 이름이 저장되어 있다면
     // show the greetings
-    // onLoginSubmit();
     paintGreetings(savedUsername); //인사말을 출력한다.
 }
 
@@ -33,10 +32,3 @@ function paintGreetings (username) {
     greeting.classList.remove(HIDDEN_CLASSNAME); //h1의 hidden 클래스명 제거함
 }
 
-// link.addEventListener("click", handleLinkClick)
-
-// function handleLinkClick(event) {
-    //     event.preventDefault();
-    //     console.dir(event);
-    //     alert("clicked!")
-    // }
