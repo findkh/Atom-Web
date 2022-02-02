@@ -1,7 +1,185 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-@import "main.css";
-@import "location.css";
-@import "clock.css";
-@import "weather.css";
-@import "center.css";
-@import "todo.css";
+body {
+  background-color: #030303;
+  color: #ececbd;
+}
+
+.form,
+.greetings {
+  display: none;
+}
+
+.success {
+  text-decoration: line-through;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: fadeIn 1.5s linear;
+}
+
+form,
+button,
+input,
+ul,
+li,
+input:focus {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  background: none;
+}
+
+#login-form{
+  min-width: 400px;
+}
+
+input::placeholder {
+  color: rgb(218, 212, 131);
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden{
+  display: none;
+}
+
+body {
+  height: auto;
+}
+
+#weather {
+  text-align: right;
+  margin: 25px auto;
+}
+
+#clock,
+#login-form,
+#greeting,
+#todo-form,
+#todo-input,
+#todo-list,
+#quote {
+  text-align: center;
+}
+
+#login-form {
+  margin-bottom: 250px;
+  font-size: 60px;
+}
+
+#login-form input {
+  width: 300px;
+  color: rgba(218, 212, 131);
+  text-align: center;
+  font-size: 30px;
+  padding: 10px 80px 10px 80px;
+  border-bottom: 1px solid transparent;
+}
+
+#login-form input:focus {
+  outline: none;
+  border-bottom: 1px solid #eee;
+}
+
+#login-form button {
+  color: #eee;
+  border-radius: 7px;
+  text-transform: uppercase;
+  padding: 5px 12px 5px 12px;
+  outline: 1px solid transparent;
+}
+
+#login-form button:hover {
+  color: #fff;
+  outline: 1px solid #eee;
+}
+
+#greeting {
+  margin-bottom: 250px;
+  font-size: 60px;
+}
+
+#clock {
+  margin-top: -200px;
+  color: #fff;
+  font-size: 100px;
+}
+
+#todo-form {
+  margin-top: -80px;
+}
+
+#todo-form input {
+  width: 500px;
+  color: rgba(218, 212, 131);
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 20px 80px 10px 80px;
+  font-size: 24px;
+}
+
+#todo-form input::placeholder {
+  font-size: 30px;
+}
+
+#todo-form input:focus {
+  outline: none;
+  border-bottom: 1px solid #fff;
+}
+
+#todo-list {
+  margin: 40px auto;
+  width: 500px;
+}
+
+#todo-list li {
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+#todo-list li:hover {
+  cursor: pointer;
+  text-decoration: line-through;
+}
+
+#todo-list button {
+  font-size: 12px;
+  margin: 0px auto;
+  position: absolute;
+  right: 37%;
+  color: #e7e7e7;
+}
+
+#quote {
+  width: 500px;
+  text-align: right;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  font-size: 17px;
+  font-style: italic;
+}
+
+#quote span:last-child:before {
+  content: "─";
+  padding: 5px;
+}

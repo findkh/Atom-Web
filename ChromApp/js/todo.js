@@ -65,7 +65,7 @@ false를 리턴하면 그 item은 새로운 array에 포함되지 않는다.
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY); //localstorage에 저장된 문자열을 가져옴
-console.log(savedToDos);
+// console.log(savedToDos);
 
 if (savedToDos !== null) { //localstorage에 아무것도 없다면 null, null이 아니라면
   const parsedToDos = JSON.parse(savedToDos); 

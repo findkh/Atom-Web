@@ -1,4 +1,4 @@
-const clock = document.querySelector(".js-clock .clock")
+const clock = document.querySelector("#clock");
 // console.log(clock);
 // clock.innerText = "lalal"
 
