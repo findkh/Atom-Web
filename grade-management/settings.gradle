@@ -9,3 +9,7 @@
 
 rootProject.name = 'grade-management'
 include('app')
+include('app-grade-management-client')
+include('app-grade-management-server')
+include('app-grade-management-client2')
+include('app-grade-management-server2')
