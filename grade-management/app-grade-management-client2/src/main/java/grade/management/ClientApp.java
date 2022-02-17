@@ -1,34 +1,28 @@
 package grade.management;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import grade.management.handler.ScoreHandler;
+import grade.management.net.ScoreTableProxy;
 import grade.util.Prompt;
 
 public class ClientApp {
 
-
+  //통신하는 코드는 scoreTableProxy라는 캡슐에 다 들어가 있다.
   public static void main(String[] args) {
     new ClientApp().service();
   }
 
   public void service() {
-    try (Socket socket = new Socket("localhost", 3336);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());) {
 
-      System.out.println("서버와 연결되었음");
-
-      ScoreHandler scorehandler = new ScoreHandler(in, out);
+    try  {
+      ScoreTableProxy scoreTableProxy = new ScoreTableProxy("localhost", 3336);
+      ScoreHandler scorehandler = new ScoreHandler(scoreTableProxy);
 
       while(true) {
         printMenu();
         String input = Prompt.promptString("명령> ");
 
         if (checkQuit(input)) {
-          out.writeUTF("quit");
-          out.flush();
+          scoreTableProxy.close();
           break;
         }
 
@@ -45,6 +39,7 @@ public class ClientApp {
         } catch(Exception e) {
           System.out.println("실행 중 오류 발생 - " + e.getMessage());
         }
+
         System.out.println();
       }//while
     } catch (Exception e) {
@@ -63,8 +58,7 @@ public class ClientApp {
     System.out.println("5. 삭제");
   }
 
-
-  public boolean checkQuit(String input) {
+  private boolean checkQuit(String input) {
     return input.equals("quit") || input.equals("exit");
   }
 }

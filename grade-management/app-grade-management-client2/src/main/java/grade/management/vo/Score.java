@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class Score implements Serializable{
   private static final long serialVersionUID = 1L;
+
   String name;
   int kor;
   int eng;
@@ -21,6 +22,7 @@ public class Score implements Serializable{
     score.setKor(Integer.parseInt(values[1]));
     score.setEng(Integer.parseInt(values[2]));
     score.setMath(Integer.parseInt(values[3]));
+
     return score;
   }
 

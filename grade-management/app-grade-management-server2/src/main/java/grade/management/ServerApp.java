@@ -8,6 +8,7 @@ import grade.management.table.ScoreTable;
 import grade.management.vo.Score;
 
 public class ServerApp {
+
   public static void main(String[] args) {
     new ServerApp().service();
   }
@@ -22,13 +23,11 @@ public class ServerApp {
       while(true) {
         new RequestHandler(serverSocket.accept()).start(); //스레드를 가동시킬 때는 start()
         //serverSocket.accept()서버가 클라이언트를 accept해야 RequestHandler의 생성자가 객체를 생성한다.
-
       } //while (true)
 
     } catch (Exception e) {
       System.out.println("서버 실행 오류!");
     } 
-
     System.out.println("종료");
   }
 
@@ -93,6 +92,7 @@ public class ServerApp {
             }
             out.flush();
           } catch (Exception e) {
+            out.writeUTF("fail");
             out.writeUTF("실행오류: " + e.getMessage());
             out.flush();
           }

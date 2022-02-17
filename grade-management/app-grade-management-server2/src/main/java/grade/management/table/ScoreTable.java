@@ -19,7 +19,6 @@ public class ScoreTable {
       while((line = in.readLine()) != null) { 
         scores.add(Score.fromCSV(line)); //csv형식으로 만들어서 ArrayList에 저장한다.
       }
-
     } catch(Exception e) {
       System.out.println("데이터 로딩 중 오류 발생!");
     }
