@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>새 글작성</title>
+</head>
+<body>
+  <h1>글 작성하기</h1>
+  <form>
+    제목 : <input id="x-title" type="text"><br>
+    내용 : <textarea id="x-content" cols="70" rows="20"></textarea><br>
+    <button id="x-add-btn" type="button">등록</button>
+    <button id="x-cancel-btn" type="button">취소</button>
+  </form>
+
+<script>
+  var xTitle = document.querySelector("#x-title");
+  var xContent = document.querySelector("#x-content");
+  var xCancel = document.querySelector("#x-cancel-btn");
+  console.log(document.querySelector("#x-cancel-btn"));
+
+  document.querySelector("#x-add-btn").onclick = function() {
+    if(xTitle.value == "" || xContent.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
+
+  fetch(`/board/add?title=${xTitle.value}&content=${xContent.value}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      location.href="index.html";
+    });
+  };
+  
+  xCancel.onclick = function() {
+    window.location.href="index.html";
+  }
+
+</script>
+</body>
+</html>
