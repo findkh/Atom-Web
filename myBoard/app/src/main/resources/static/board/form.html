@@ -2,7 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>새 글작성</title>
+  <title>my board</title>
+  <style>
+    #x-title {
+      width: 520px;
+      height: 20px;
+      border-color: rgb(52, 152, 219);
+      margin-bottom: 2px;
+    }
+  
+    #x-content {
+      resize: none;
+      border-color: rgb(52, 152, 219);
+    }
+  </style>
 </head>
 <body>
   <h1>글 작성하기</h1>
@@ -16,8 +29,6 @@
 <script>
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
-  var xCancel = document.querySelector("#x-cancel-btn");
-  console.log(document.querySelector("#x-cancel-btn"));
 
   document.querySelector("#x-add-btn").onclick = function() {
     if(xTitle.value == "" || xContent.value == "") {
@@ -34,7 +45,7 @@
     });
   };
   
-  xCancel.onclick = function() {
+  document.querySelector("#x-cancel-btn").onclick = function() {
     window.location.href="index.html";
   }
 
