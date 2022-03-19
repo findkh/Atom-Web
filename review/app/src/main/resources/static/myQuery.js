@@ -87,9 +87,6 @@ function myQuery(selector, parent) {
     e.addEventListener("keyup", listener);
     return e;
   }
-
-
-
   return e; 
 }
 
