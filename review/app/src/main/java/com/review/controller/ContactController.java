@@ -54,7 +54,7 @@ public class ContactController {
     } */
 
     for(int i = 0; i < tel.length; i++) {
-      String[] value = tel[i].split(",");
+      String[] value = tel[i].split("_");
       if(value[1].length() == 0) {
         continue;
       }
@@ -81,7 +81,7 @@ public class ContactController {
     if (count > 0) { // 변경된 것이 있다면 
       contactDao.deleteTelByContactNo(contact.getNo()); //그 넘어온 연락처의 모든 전화번호를 지운다.
       for(int i = 0; i < tel.length; i++) {
-        String[] value = tel[i].split(",");
+        String[] value = tel[i].split("_");
         if(value[1].length() == 0) { //전화번호를 입력 안했으면 다음 데이터를 가져온다.
           continue;
         }
