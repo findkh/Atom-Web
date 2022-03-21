@@ -1,100 +1,95 @@
 package com.review.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.review.dao.ContactDao;
 import com.review.domain.Contact;
 import com.review.domain.ContactTel;
+import com.review.service.ContactService;
 
 @RestController 
 public class ContactController {
 
   @Autowired
-  ContactDao contactDao;
+  ContactService contactService; //클래스 대신 인터페이스를 지정한다.
 
   @RequestMapping("/contact/list")
   public Object list() {
-    //    List<Contact> contacts = contactDao.findAll(); //연락처 목록을 가져온다.
-    //    for (Contact contact : contacts) { //연락처 목록에서 연락처 하나씩 꺼낸다.
-    //      int contactNo = contact.getNo(); //연락처에서 연락처 번호를 꺼낸다.
-    //      List<ContactTel> tels = contactDao.findByContactNo(contactNo); //연락처 번호에서 전화번호 목록을 꺼낸다.
-    //      contact.setTels(tels); //꺼낸 전화번호 목록을 전화번호에 담는다.
-    //    }
-    //    return contacts;
-
-    List<Contact> contacts = contactDao.findAll();
-    for (Contact contact : contacts) {
-      contact.setTels(contactDao.findTelByContactNo(contact.getNo())); 
-    }
-    return contacts;
+    return contactService.list();
   }
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact, String[] tel) throws Exception {
 
-    /*파라미터 값을 제대로 받았는지 확인
-    System.out.println(contact);
-    System.out.println(tel);
-    for(String t : tel) {
-      System.out.print(t + ",");
-    }
-    System.out.println();
-    return 0;
-     */
-
-    contactDao.insert(contact);
-
-    /* 줄여쓰기
-    for(String t : tel) {
-      ContactTel contactTel = new ContactTel();
-      contactTel.setTel(t);
-      contactDao.insertTel(contactTel);
-    } */
-
-    for(int i = 0; i < tel.length; i++) {
+    //요청 파라미터 분석 및 가공
+    ArrayList<ContactTel> telList = new ArrayList<>();
+    for (int i = 0; i < tel.length; i++) {
       String[] value = tel[i].split("_");
       if(value[1].length() == 0) {
         continue;
       }
-      contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]));
+      ContactTel contactTel = new ContactTel(Integer.parseInt(value[0]), value[1]);
+      telList.add(contactTel);
     }
+    contact.setTels(telList);
 
-    return 1;
+    //서비스 객체 실행
+    return contactService.add(contact);
 
+    /*
+    //1. 트랜잭션으로 묶어서 실행할 작업을 정의한다.
+    //-> 스프링 프레임워크에서 정한 규칙(TransactionCallback)에 따라 정의해야 한다
+    class ContactAddTransaction implements TransactionCallback {
+      @Override
+      public Object doInTransaction(TransactionStatus status) {
+        // 트랜잭션으로 묶어서 할 작업을 기술한다.
+        contactDao.insert(contact);
+
+        for(int i = 0; i < tel.length; i++) {
+
+          contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]));
+        }
+        return 1;
+      }
+    }
+    //2. 트랜잭션 작업을 수행한다.
+    return transactionTemplate.execute(new ContactAddTransaction());
+     */
   }
 
   @RequestMapping("/contact/get")
   public Object get(int no) {
-    Contact contact = contactDao.findByNo(no);
+    Contact contact = contactService.get(no);
     if (contact == null) {
-      return "";
+      return ""; //컨트롤러는 서비스 객체 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
     }
-    contact.setTels(contactDao.findTelByContactNo(no));
     return contact;
   }
 
   @RequestMapping("/contact/update")
   public Object update(Contact contact, String[] tel) throws Exception {
-    int count =  contactDao.update(contact); //넘어온 연락처 정보를 저장한다.
-    if (count > 0) { // 변경된 것이 있다면 
-      contactDao.deleteTelByContactNo(contact.getNo()); //그 넘어온 연락처의 모든 전화번호를 지운다.
-      for(int i = 0; i < tel.length; i++) {
-        String[] value = tel[i].split("_");
-        if(value[1].length() == 0) { //전화번호를 입력 안했으면 다음 데이터를 가져온다.
-          continue;
-        }
-        contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1])); //새로 등록한다.
+    //요청 파라미터 분석 및 가공
+    ArrayList<ContactTel> telList = new ArrayList<>();
+    for (int i = 0; i < tel.length; i++) {
+      String[] value = tel[i].split("_");
+      if(value[1].length() == 0) {
+        continue;
       }
+      //연락처 변경의 경우 이미 연락처 번호를 알기 떄문에
+      //전화번호를 객체에 담을 때 연락처 번호도 함께 저장한다.
+      ContactTel contactTel = new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]);
+      telList.add(contactTel);
     }
-    return count;
+    contact.setTels(telList);
+
+    //서비스 객체 실행
+    return contactService.update(contact);
   }
 
   @RequestMapping("/contact/delete")
   public Object delete(int no) throws Exception {
-    contactDao.deleteTelByContactNo(no);
-    return contactDao.delete(no);
+    return contactService.delete(no);
   }
 
 }
