@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      /*  => float 대신 absolute를 사용하여 동일한 화면을 출력해보자!*/
+
+    body{
+      font-family: "맑은 고딕";
+      font-size: small;
+    }
+
+    div{
+      border: 2px solid red;
+    }
+
+    address {
+      display: inline;
+    font-style: normal;
+    }
+
+    ul, ol, address {
+      border: 1px solid rgb(55, 0, 255);
+    }
+
+  a, span {
+    border: 1px solid rgb(208, 255, 0);
+    padding: 10px;
+    margin: 10px;
+    display: inline; /*inline은 width와 height가 먹히지 않는다.*/
+    width: 80px;
+    height: 20px;
+  } 
+
+    #sudal {
+      background-color: beige;
+      color: rgb(12, 137, 196);
+      border-radius: 4px;
+      padding: 3px 3px 0px 3px;
+    }
+
+    #company {
+    color: rgb(115, 128, 0);
+    }
+
+    #menu {
+      background-color: lightgray;
+    font-size: 1.2em;
+    width: 180px;
+    border: 1px solid red;
+    position: absolute;
+    left: 0px; 
+    top: 0px;
+    float: left;
+    }
+
+    #menu ul > li {
+    font-weight: bold;
+    color: red;
+    }
+
+    #menu ol {
+      font-weight: normal;
+      color: blanchedalmond;
+    }
+
+    #content {
+      font-family: 바탕체, 궁서체, AppleMyungjo, serif;
+    border: 1px solid red;
+    margin-left: 184px;
+    padding: 10px;
+    height: 500px;
+    min-height: 500px; /*최소 높이를 500으로 고정함. absoulte 사용할 때 사용 - footer 때문에*/
+    }
+
+    #footer {
+      font-size: 80%; /* = 0.8em */
+    /* 왼쪽에 이 태그의 내용을 가리는 것이 있다면
+        그 아래로 위치하도록 이동시킨다.
+        단 왼쪽에 있는 것이 float 객체일 때!*/
+    /*clear: left; float 일때만 먹히고, absoulte는 안먹힘*/ 
+    text-align: center;
+    border: 1px solid red;
+  }
+
+    #footer > p {
+      font-style: italic;
+    }
+
+    p, h1, address {
+    border: 1px dashed blue;
+  }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <ul>
+      <li class="c1">메뉴1</li>
+      <li class="c2">메뉴2</li>
+      <li class="c3">메뉴3</li>
+      <li class="c4">메뉴4</li>
+      <li class="c5">메뉴5</li>
+      <li class="c6">메뉴6</li>
+        <ol>
+          <li>ol의 메뉴1</li>
+          <li>ol의 메뉴2</li>
+          <li>ol의 메뉴3</li>
+          <li>ol의 메뉴4</li>
+        </ol>
+    </ul>
+    아이디: <input type="text" name="username"><br>
+    암호: <input type="password" name="pwd"><br>
+    <button>로그인</button>
+    <button>회원가입</button><br>
+    <a href="http://www.facebook.com">페이스북</a>
+    <a href="http://www.google.com">구글</a>
+    <a href="http://www.twitter.com">트위터</a>
+  </div>
+
+  <div id="content">
+    <h1>Lorem Ipsum</h1>
+    <p>
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+      "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+    </p>
+    <ul>
+      <li>What is Lorem Ipsum?</li>
+      <li>Why do we use it?</li>
+      <li>Where does it come from?</li>
+      <li>Where can I get some?</li>
+    </ul>
+  </div>
+
+  <div id="footer">
+    <span id="sudal">sudal</span>
+    <span id="company">서울지점</span>
+    <address>서울시 구로구 남부순환로</address>
+    <p>Copyright by sudal</p>
+  </div>
+  
+</body>
+</html>
