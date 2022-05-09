@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안녕하세요!</title>
+<style>
+  #header {
+    position: relative;
+    background-color: navy;
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+  }
+  #loginBtn {
+    position: absolute;
+    right: 40px;    
+  }
+  #logoutBtn {
+    position: absolute;
+    right: 40px;
+  }
+  #appTitle {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .container {
+    width: 800px;
+    margin: 0px auto;
+  }
+  #userName {
+    position: absolute;
+    right: 120px;
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div id="header">
+    <span id="appTitle">My Project </span>
+    <button id="loginBtn" class="notLogin">로그인</button>
+    <span id="userName" class="login"></span>
+    <button id="logoutBtn" class="login">로그아웃</button>
+    </div>
+      <p>이 프로젝트는 자바 실전 프로그래밍을 경험하기 위해 만든 프로젝트 입니다.</p>
+      <ul>
+        <li><a href="myboard/index.html">게시판</a></li>
+      </ul>
+</div>
+
+<script>
+
+css(".login", "display", "none");
+
+fetch("/member/getLoginUser").then(function(response) {
+  return response.json();
+}).then(function(result) {
+  if(result.status == "success") {
+    document.querySelector("#userName").innerHTML = result.data.name;
+    css(".login", "display", "");
+    css(".notLogin", "display", "none");
+  }
+});
+
+function css(selector, name, value) {
+  var el = document.querySelectorAll(selector);
+    for (var e of el) {
+      e.style[name] = value;
+    }
+};
+
+document.querySelector("#loginBtn").onclick = function() {
+  location.href="/member/signin.html";
+};
+
+document.querySelector("#logoutBtn").onclick = function() {
+  fetch("/member/signout").then(function(response) {
+    location.href="/index.html";
+  });
+};
+
+</script>
+</body>
+</html>

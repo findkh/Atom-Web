@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+</head>
+<body>
+
+<h1>회원가입</h1>
+<form name="SignupForm">
+이름 : <input name="name" type="text"><br>
+이메일 : <input name="email" type="email"><br>
+암호 : <input name="password" type="password"><br>
+<button id="addBtn">확인</button> <!--submit 버튼-->
+<button id="cancleBtn" type="button">취소</button>
+</form>
+
+<script>
+
+var Name = document.querySelector("input[name=name]");
+var Email = document.querySelector("input[name=email]");
+var PassWord = document.querySelector("input[name=password]");
+
+document.querySelector("form[name=SignupForm]").onsubmit = function() {
+  if (Name.value == "" ||
+      Email.value == "" ||
+      PassWord.value == "") {
+      window.alert("필수 입력 항목이 비어있습니다.")
+      return false;
+  }
+  var fd = new FormData(document.forms.namedItem("SignupForm"));
+
+  fetch("/member/signup", {
+    method : "POST",
+    body : new URLSearchParams(fd)
+  })
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(text) {
+    if (text == "success") {
+      window.alert("회원가입 성공!");
+      location.href="signin.html";
+    } else {
+      window.alert("회원가입 실패!");
+    }
+  });
+  return false;
+}
+
+document.querySelector("#cancleBtn").onclick = function() {
+  window.location.href = "../index.html";
+};
+
+</script>
+
+</body>
+</html>
