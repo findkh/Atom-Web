@@ -10,4 +10,5 @@ public class Member {
   String email;
   String password;
   Date registDate;
+  String photo;
 }

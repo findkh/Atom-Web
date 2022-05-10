@@ -11,4 +11,5 @@ public class myBoard {
   int viewCount;
   Date createdDate;
   Member writer;
+  String photo;
 }

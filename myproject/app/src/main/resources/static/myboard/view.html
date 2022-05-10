@@ -3,16 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>게시글</title>
+  <style>
+    #x-photo{
+      height: 300px;
+    }
+  </style>
 </head>
 <body>
 
 <h1>게시글 상세</h1>
 
-<form name="form1">
+<form name="viewForm">
 번호: <input id="x-no" type="text" readonly name="no"><br>
 제목*: <input id="x-title" type="text" name="title"><br>
+사진 : <input name="file" type="file"><br>
 내용*: <textarea id="x-content" cols="60" rows="10" name="content"></textarea><br>
-작성자: <span id="x-writer" type="text"></span><br>
+<img id="x-photo" src=""> <br>
+작성자: <span id="x-writer"></span><br>
 조회수: <span id="x-viewCount"></span><br>
 등록일: <span id="x-createdDate"></span><br>
 별표(*) 항목은 필수 입력입니다.<br>
@@ -44,20 +51,25 @@ console.log(no);
 
 var xNo = document.querySelector("#x-no");
 var xTitle = document.querySelector("#x-title");
+var xPhoto = document.querySelector("#x-photo");
 var xContent = document.querySelector("#x-content");
 var xWriter = document.querySelector("#x-writer");
 var xViewCount = document.querySelector("#x-viewCount");
 var xCreatedDate = document.querySelector("#x-createdDate");
+console.log(xWriter);
 
 fetch(`/myboard/get?no=${no}`)
 .then(function(response) {
   return response.json();
 })
 .then(function(board) {
-  // 4) 연락처 상세 정보를 화면에 출력한다.
+  console.log(board);
   xNo.value = board.no;
   xTitle.value = board.title;
   xContent.value = board.content;
+  if (board.photo != null) {
+  xPhoto.src="/myboard/photo?filename=" + board.photo;
+  };
   xWriter.innerHTML = board.writer.name;
   xViewCount.innerHTML = board.viewCount;
   xCreatedDate.innerHTML = board.createdDate;
@@ -69,10 +81,11 @@ document.querySelector("#x-update-btn").onclick = function() {
     return;
   }
 
-  var fd = new FormData(document.forms.namedItem("form1"));
+  var fd = new FormData(document.forms.namedItem("viewForm"));
+
   fetch("/myboard/update", {
     method: "POST",
-    body: new URLSearchParams(fd)
+    body: fd
   })
   .then(function(response) {
     return response.json();

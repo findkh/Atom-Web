@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>안녕하세요!</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   #header {
     position: relative;
@@ -24,7 +25,7 @@
     right: 40px;
   }
   #appTitle {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
   }
   .container {
@@ -35,6 +36,19 @@
     position: absolute;
     right: 120px;
   }
+  #profile{
+    position: absolute;
+    right: 180px;
+    width:40px; height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+  }
+  #profileImg{
+    max-width:100%; max-height:100%;
+  }
+
 </style>
 </head>
 
@@ -43,6 +57,7 @@
   <div id="header">
     <span id="appTitle">My Project </span>
     <button id="loginBtn" class="notLogin">로그인</button>
+    <div id="profile"></div>
     <span id="userName" class="login"></span>
     <button id="logoutBtn" class="login">로그아웃</button>
     </div>
@@ -60,6 +75,18 @@ fetch("/member/getLoginUser").then(function(response) {
   return response.json();
 }).then(function(result) {
   if(result.status == "success") {
+    // console.log(result.data.photo);
+    if(result.data.photo == null) {
+      result.data.photo = "default.jpg";
+    }
+    var img = document.createElement("img");
+    img.id = "profileImg";
+    img.src="member/photo?filename=40x40_"
+    var imgpath = `${result.data.photo}`;
+    img.src += imgpath
+    img.id = "profileImg";
+    console.log(img.src);
+    document.querySelector("#profile").appendChild(img);
     document.querySelector("#userName").innerHTML = result.data.name;
     css(".login", "display", "");
     css(".notLogin", "display", "none");

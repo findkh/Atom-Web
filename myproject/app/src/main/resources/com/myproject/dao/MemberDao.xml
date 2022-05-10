@@ -10,18 +10,20 @@
     <result column="name" property="name"/>
     <result column="email" property="email"/>
     <result column="regist_date" property="registDate"/>
+    <result column="photo" property="photo"/>
   </resultMap>
 
   <insert id="insert" parameterType="member">
-    insert into my_member (name,email,password)
-    values(#{name},#{email},password(#{password}))
+    insert into my_member (name,email,password,photo)
+    values(#{name},#{email},password(#{password}),#{photo})
   </insert>
   
   <select id="finByEmailAndPassword" resultMap="memberMap">
     select
       no,
       name,
-      email
+      email,
+      photo
     from
      my_member
     where

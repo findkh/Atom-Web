@@ -70,6 +70,39 @@
     - myboard/form.html 변경
     - myboard/index.html 변경
     - myboard.view.html 변경
-    
+#
+# 220510 - 파일 입출력
+- 회원 가입할 때 프로필 사진과 게시판에 사진을 올릴 수 있게 만든다.
+  - DB에 컬럼을 추가한다.
+      ```
+      alter table my_member
+        add column photo varchar(255);
+      alter table my_board
+        add column photo varchar(255);
+      ```
+  - 도메인 클래스 수정한다.
+  - SQL Mapper 파일 수정한다.
+    - xml 파일 변경함
+      - resultMap 태그에 컬럼 매핑 정보 추가하고 SQL문에도 추가한다.
+  - 사진 파일 업로드 기능을 page Controller에 추가한다.
+      - add(), update() 메서드에 파일 업로드 기능 추가
+      - URL 경로에서 지정한 파일을 찾아 클라이언트에게 전송하는 photo() 메서드 추가
+  - 프론트엔드 수정
+    - input 태그 추가 후 POST 요청으로 파일을 업로드한다.
+    - 게시판 파일 제대로 업로드 된 것 확인함!
+      <img src="https://user-images.githubusercontent.com/89373222/167575129-86cd02cf-f826-4357-a640-8d2a19f7886c.png">
+      <img src="https://user-images.githubusercontent.com/89373222/167575294-bdbd597f-e398-4001-a22a-55ba8005f84b.png">
+      <img src="https://user-images.githubusercontent.com/89373222/167575472-e22748c7-c35d-4e44-9cb9-545f9d326b36.png">
+  - 썸네일 이미지 적용해서 로그인 시 프로필 사진 보이게 하기 사진이 없을 경우 기본 이미지 나오게 한다.
+    - https://github.com/coobird/thumbnailator
+    - search.maven.org 가서 다운로드 받기 build script 파일에 라이브러리 추가한다.
+    - 업로드 파일을 저장한 후 해당 파일의 썸네일 이미지 파일을 생성한다.
+    - 프론트앤드 수정
+    - update할 때 사진을 제외하고 update할 때를 대비하여 동적 SQL 기능 추가
+      <img src="https://user-images.githubusercontent.com/89373222/167644513-b7f987a1-5150-45e0-9da8-16a93eeff6b5.png">  
+      작성한 글 내의 사진 보기
+      <img src="https://user-images.githubusercontent.com/89373222/167644770-6f8b29a7-b0c7-4568-91f3-10834a8700f6.png">  
+      프로필 사진 썸네일 이미지 적용하기
+
 
   

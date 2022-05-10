@@ -8,9 +8,10 @@
 
 <h1>새 게시글</h1>
 
-<form name="form1">
-제목*: <input id="x-title" type="text" name="title"><br>
-내용*: <textarea id="x-content" cols="60" rows="10" name="content"></textarea><br>
+<form name="boardForm">
+제목*: <input type="text" name="title"><br>
+사진 : <input name="file" type="file"><br>
+내용*: <textarea cols="60" rows="10" name="content"></textarea><br>
 별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cancel-btn" type="button">취소</button>
@@ -18,6 +19,7 @@
 
 <script type="text/javascript">
   var xTitle = document.querySelector("input[name=title]");
+  var xPhoto = document.querySelector("input[name=file]");
   var xContent = document.querySelector("textarea");
 
   document.querySelector("#x-add-btn").onclick = function() {
@@ -26,23 +28,33 @@
       return;
     }
 
-    var fd = new FormData(document.forms.namedItem("form1"));
+    var fd = new FormData(document.forms.namedItem("boardForm"));
 
-    fetch("/myboard/add", {
-      method : "POST",
-      body: new URLSearchParams(fd)
+    fetch ("/member/getLoginUser", {
+      method : "POST"
     })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(result) {
-        if (result.status == "success") {
-          location.href = "index.html";
-        } else {
-          window.alert("게시글 등록 실패!");
-          console.log(result.data);
-        }
-      });
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(result) {
+      if(result.status == "success") {
+        fetch("/myboard/add", {
+        method : "POST",
+        body: fd
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(result) {
+          if (result.status == "success") {
+            location.href = "index.html";
+          } else {
+            window.alert("게시글 등록 실패!");
+            console.log(result);
+          }
+        });
+      }
+    });
   };
 
   document.querySelector("#x-cancel-btn").onclick = function() {
