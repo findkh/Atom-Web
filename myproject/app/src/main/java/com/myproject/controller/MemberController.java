@@ -112,10 +112,10 @@ public class MemberController {
 
       //썸네일 이미지 파일 생성
       Thumbnails.of(photoFile)
-      .size(40, 40)
+      .size(50, 50)
       .crop(Positions.CENTER)
       //      .outputFormat("jpg")
-      .toFile(new File("./upload/profile/" + "40x40_" + filename));
+      .toFile(new File("./upload/profile/" + "50x50_" + filename));
 
       return filename;
     } else {

@@ -103,6 +103,17 @@
       작성한 글 내의 사진 보기
       <img src="https://user-images.githubusercontent.com/89373222/167644770-6f8b29a7-b0c7-4568-91f3-10834a8700f6.png">  
       프로필 사진 썸네일 이미지 적용하기
+#
+# 220511 - Header와 Footer에 부트스트랩 적용
+  - npm 적용하기
+    - `npm init`을 실행하여 package.json 설정 파일을 준비한다.
+    - .gitignore 수정
+    - `npm install bootstrap` 실행하여 부트스트랩을 추가한다.
+  - bootstrap을 적용하여 header와 footer를 만든다.
+    - CSS 적용
+  - 프로젝트 때 사용하지 않았던 bootstrap icons 적용
+  - 결과
+    <img src="https://user-images.githubusercontent.com/89373222/167767672-6029cb1a-9bec-476c-9ecc-b859fa3f52ff.png">
 
 
   
