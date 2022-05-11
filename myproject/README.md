@@ -7,14 +7,14 @@
   - 의존 라이브러리 블록에서 `mybatis`라이브러리를 등록한다.
   - `gradle eclipse`
 #
-# 220509 - Lombok 적용
+# Lombok 적용
 ## lombok 라이브러리를 프로젝트에 추가한다.
   - build.gradle에 lombok 라이브러리 추가
   - `id "io.freefair.lombok" version "6.4.1"` 플러그인 추가
   - `java -jar lombok.jar` 파일 실행하여 이클립스 IDE에 lombok 기능 추가
   - 도메인 클래스에 lombok을 적용한다.
 #
-# 220509 - 회원가입, 로그인, 로그아웃 적용
+# 회원가입, 로그인, 로그아웃 적용
 ## 회원 테이블을 추가한다.
   - db에 my_member 테이블 추가
 ## 회원 데이터를 다룰 도메인 클래스, DAO 인터페이스를 정의한다.
@@ -48,7 +48,7 @@
   - 로그인 안했을 때 상단 메뉴바  
   <img src="https://user-images.githubusercontent.com/89373222/167369137-5097dccb-81fa-4f23-84f5-cc43125dac0c.png">
 #
-# 220509 - 로그인과 세션을 활용하여 사용자를 구분하여 데이터 처리하기
+# 로그인과 세션을 활용하여 사용자를 구분하여 데이터 처리하기
   - 게시글 테이블에 작성자 정보를 추가한다.
     ```
     delete from my_board;
@@ -114,6 +114,20 @@
   - 프로젝트 때 사용하지 않았던 bootstrap icons 적용
   - 결과
     <img src="https://user-images.githubusercontent.com/89373222/167767672-6029cb1a-9bec-476c-9ecc-b859fa3f52ff.png">
-
-
-  
+#
+# 페이스북 로그인
+  - http://developers.facebook.com 앱 등록
+  - 프론트 작업
+  - 백엔드 작업
+    - page Controller fbSingIn() method 추가
+      - 페이스북 서버에 토큰을 보내고 사용자 정보를 받아오는 메서드를 추가한다.
+    - service, defaultservice, dao, xml 변경
+  - 결과
+    <img src="https://user-images.githubusercontent.com/89373222/167832245-e39a28ec-2c90-48dc-a16c-6c6f6bd9e8ac.png">
+    새 회원 로그인
+    <img src="https://user-images.githubusercontent.com/89373222/167832412-74fb5244-19c4-4687-8419-ce811ac2db0f.png">
+    기존 회원 로그인
+#
+# 로그인 페이지 부트스트랩 적용
+  - 결과
+    <img src="https://user-images.githubusercontent.com/89373222/167880320-9c17be46-f9dd-4843-967e-5cf6596cda53.png">
