@@ -11,6 +11,8 @@ public interface MemberDao {
 
   Member finByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
+  Member finByEmail(String email);
+
   //  List<Member> findAll();
   //
   //  Member findByNo(int no);

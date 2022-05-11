@@ -22,5 +22,10 @@ public class DefaultMemberService implements MemberService{
     return memberDao.finByEmailAndPassword(email, password);
   }
 
+  @Override
+  public Member get(String email) {
+    return memberDao.finByEmail(email);
+  }
+
 
 }

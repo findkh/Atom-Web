@@ -4,6 +4,7 @@ import static com.myproject.controller.ResultMap.FAIL;
 import static com.myproject.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import com.myproject.domain.Member;
 import com.myproject.service.MemberService;
@@ -24,13 +26,13 @@ import net.coobird.thumbnailator.geometry.Positions;
 public class MemberController {
 
   @Autowired
-  MemberService memberSerivce;
+  MemberService memberService;
 
   @RequestMapping("/member/signup") 
   public Object singUp(Member member, MultipartFile file) {
     try {
       member.setPhoto(saveFile(file));
-      if (memberSerivce.add(member) == 1) {
+      if (memberService.add(member) == 1) {
         return new ResultMap().setStatus(SUCCESS);
       } else {
         return new ResultMap().setStatus(FAIL);
@@ -43,7 +45,7 @@ public class MemberController {
 
   @RequestMapping("/member/signin") 
   public Object singIn(String email, String password, HttpSession session) {
-    Member loginUser = memberSerivce.get(email, password);
+    Member loginUser = memberService.get(email, password);
     if (loginUser == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
     }
@@ -51,6 +53,41 @@ public class MemberController {
     //로그인 회원의 정보를 사용할 수 있도록 세션에 보관한다.
     session.setAttribute("loginUser", loginUser);
     return new ResultMap().setStatus(SUCCESS);
+  }
+
+  @SuppressWarnings("unchecked")
+  @RequestMapping("/member/fbsingin")
+  public Object fbSingIn(String accessToken, HttpSession session) throws Exception{
+
+    //페이스북 서버에 접속하여 사용자 정보를 요구한다.
+    RestTemplate restTemplate = new RestTemplate();
+    Map<String,String> result = restTemplate.getForObject( //getForObject : get요청을 하는 URL
+        "https://graph.facebook.com/v13.0/me?access_token={value1}&fields={value2}", // 요청할 URL 
+        Map.class, // 서버에서 받은 결과의 타입 
+        accessToken, // URL의 첫 번째 자리에 들어갈 값
+        "id,name,email,picture" // 페이스북 측에 요청하는 로그인 사용자 정보
+        );
+
+    //사용자 이름과 이메일을 알아낸다
+    String name = result.get("name");
+    String email = result.get("email");
+
+    //현재 등록된 사용자 중에서 해당 이메일의 사용자가 있는지 확인한다.
+    Member member = memberService.get(email);
+
+    if(member != null) {
+      //등록된 사용자가 있다면 자동 로그인 처리한다.
+      session.setAttribute("loginUser", member);
+      return new ResultMap().setStatus(SUCCESS).setData("기존 회원 로그인");
+
+    } else {
+      //등록된 사용자가 아니라면 회원 등록 후 자동 로그인 처리한다.
+      memberService.add(new Member().setEmail(email).setName(name).setPassword("1111"));
+      session.setAttribute("loginUser", memberService.get(email));
+
+      return new ResultMap().setStatus(SUCCESS).setData("새 회원 로그인");
+    }
+
   }
 
   @RequestMapping("/member/getLoginUser") 

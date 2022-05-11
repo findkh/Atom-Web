@@ -29,5 +29,17 @@
     where
       email=#{email} and password=password(#{password})
   </select>
+  
+  <select id="finByEmail" resultMap="memberMap" parameterType="string">
+    select
+      no,
+      name,
+      email,
+      photo
+    from
+     my_member
+    where
+      email=#{email}
+  </select>
 
 </mapper>

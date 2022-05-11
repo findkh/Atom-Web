@@ -233,6 +233,7 @@ fetch("/member/getLoginUser").then(function(response) {
   return response.json();
 }).then(function(result) {
   if(result.status == "success") {
+    console.log(result);
     // console.log(result.data.photo);
     if(result.data.photo == null) {
       result.data.photo = "default.jpg";
