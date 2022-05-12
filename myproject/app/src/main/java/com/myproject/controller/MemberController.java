@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Map;
 import java.util.UUID;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -44,14 +46,23 @@ public class MemberController {
   }
 
   @RequestMapping("/member/signin") 
-  public Object singIn(String email, String password, HttpSession session) {
+  public Object singIn(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
     Member loginUser = memberService.get(email, password);
     if (loginUser == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
     }
-    //로그인이 성공하면, 
-    //로그인 회원의 정보를 사용할 수 있도록 세션에 보관한다.
+
     session.setAttribute("loginUser", loginUser);
+
+    Cookie cookie = null;
+    if (saveEmail) {
+      //이메일을 쿠키로 보낸다.(응답할 때)
+      cookie = new Cookie("userEmail", email); //쿠키는 문자열만 가능하다! 객체는 세션에 저장해야 한다.
+    } else {
+      cookie = new Cookie("userEmail", "");
+      cookie.setMaxAge(0); // 클라이언트에게 쿠키를 삭제하도록 요구한다.
+    }
+    response.addCookie(cookie);
     return new ResultMap().setStatus(SUCCESS);
   }
 

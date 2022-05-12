@@ -27,7 +27,7 @@ public class myBoardController {
 
   @RequestMapping("/myboard/list")
   public Object list() {
-    return myboardService.list();
+    return new ResultMap().setStatus(SUCCESS).setData(myboardService.list());
   }
 
   @RequestMapping("/myboard/add")
@@ -49,9 +49,9 @@ public class myBoardController {
   public Object get(int no) {
     myBoard board = myboardService.get(no);
     if (board == null) {
-      return "";
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않습니다.");
     }
-    return board;
+    return new ResultMap().setStatus(SUCCESS).setData(board);
   }
 
   @RequestMapping("/myboard/update")

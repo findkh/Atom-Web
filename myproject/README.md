@@ -124,10 +124,27 @@
     - service, defaultservice, dao, xml 변경
   - 결과
     <img src="https://user-images.githubusercontent.com/89373222/167832245-e39a28ec-2c90-48dc-a16c-6c6f6bd9e8ac.png">
-    새 회원 로그인
+    새 회원 로그인  
     <img src="https://user-images.githubusercontent.com/89373222/167832412-74fb5244-19c4-4687-8419-ce811ac2db0f.png">
-    기존 회원 로그인
+    기존 회원 로그인  
 #
 # 로그인 페이지 부트스트랩 적용
-  - 결과
-    <img src="https://user-images.githubusercontent.com/89373222/167880320-9c17be46-f9dd-4843-967e-5cf6596cda53.png">
+  - 결과  
+    <img src="https://user-images.githubusercontent.com/89373222/167880320-9c17be46-f9dd-4843-967e-5cf6596cda53.png" width="500" height="400">
+#
+# 220512 - 쿠키 활용 로그인 Email 기억하기
+  - 쿠키를 꺼내는 js-cookie 라이브러리 설치
+    - `npm i js-cookie`
+#
+# UI 레이아웃 - 헤더와 푸터 분리하기, 회원가입폼, myboard 부트스트랩 적용
+  - 오타 정리
+  - 헤더, 푸터 분리하여 border, main index, 로그인 회원가입에 넣기
+  - js, css 파일 분리  
+    <img src = "https://user-images.githubusercontent.com/89373222/168055280-264d4db6-e958-4697-8025-6438810639e2.png" width="500" height="400"/>
+    <img src = "https://user-images.githubusercontent.com/89373222/168095324-e1cef8bc-8c25-4aaa-89da-2811b2b1b381.png" width="600" height="400">
+#
+## Handlebars 적용
+  - `npm i handlebars` npm 설치
+  - Handlebars를 사용해서 동적으로 border 리스트를 불러온다.
+
+  

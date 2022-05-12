@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>게시글</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/myboard/css/form.css" rel="stylesheet">
+  <title>새 게시글 작성</title>
 </head>
-<body>
 
-<h1>새 게시글</h1>
-
+<div id="header"></div>
 <form name="boardForm">
+<h1>새 게시글</h1>
 제목*: <input type="text" name="title"><br>
 사진 : <input name="file" type="file"><br>
 내용*: <textarea cols="60" rows="10" name="content"></textarea><br>
@@ -16,51 +19,10 @@
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cancel-btn" type="button">취소</button>
 </form>
+<div id="footer"></div>
 
-<script type="text/javascript">
-  var xTitle = document.querySelector("input[name=title]");
-  var xPhoto = document.querySelector("input[name=file]");
-  var xContent = document.querySelector("textarea");
-
-  document.querySelector("#x-add-btn").onclick = function() {
-    if (xTitle.value == "" || xContent.value == "") {
-      window.alert("필수 입력 항목이 비어 있습니다.");
-      return;
-    }
-
-    var fd = new FormData(document.forms.namedItem("boardForm"));
-
-    fetch ("/member/getLoginUser", {
-      method : "POST"
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(result) {
-      if(result.status == "success") {
-        fetch("/myboard/add", {
-        method : "POST",
-        body: fd
-        })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(result) {
-          if (result.status == "success") {
-            location.href = "index.html";
-          } else {
-            window.alert("게시글 등록 실패!");
-            console.log(result);
-          }
-        });
-      }
-    });
-  };
-
-  document.querySelector("#x-cancel-btn").onclick = function() {
-    window.location.href = "index.html";
-  };
-</script>
-
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/myboard/js/form.js"></script>
 </body>
 </html>

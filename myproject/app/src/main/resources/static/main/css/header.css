@@ -1,0 +1,118 @@
+#header {
+  position: relative;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+}
+.navbar {
+  padding-top: 0px;
+  background-color: white;
+}
+.inner {
+  background-color: rgba(24, 183, 43, 0.357);
+  width: 1000px;
+  height: 57px;
+  display: inline;
+  margin: 0 auto;
+  position: relative;
+  min-width: 600px; 
+}
+.inner > .navbar-brand{
+  color: white;
+  margin-left: 30px;
+  font-size: 2em;
+  font-weight: bold;
+  justify-content: start;
+  float: left;
+}
+.inner > .navbar-brand:hover{
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  float: left;
+}
+.inner > .collapse {
+  margin-top: 12px;
+}
+.dropdown-menu {
+  background-color: rgba(24, 183, 43, 0.357);
+}
+.dropdown-item {
+  background-color: rgba(24, 183, 43, 0);
+  color: white;
+}
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.324);
+  color:white
+}
+.loginmenuDiv {
+  height: 50px;
+  width: 500px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  float: right;
+}
+.loginmenuDiv > .menu {
+  list-style: none;
+  padding-left: 0px;
+}
+#signupBtn {
+  position: absolute;
+  right: 40px;
+  align-content: center;
+  margin-top: 5px;
+}
+#loginBtn {
+  position: absolute;
+  right: 130px;
+  margin-top: 5px;
+}
+#logoutBtn {
+  position: absolute;
+  right: 40px;
+  margin-top: 5px;
+}
+#userNameDiv{
+  position: absolute;
+  right: 123px;
+  margin-top: 12px;
+  width: 65px;
+  height: 40px;
+  display:inline-block;
+  text-align: center
+}
+#userName {
+  position: block;
+  width: 65px;
+  right: 123px;
+  height: 40px;
+  color: white;
+  margin-top: 12px;
+  font-size: 18px;
+}
+#profile{
+  position: absolute;
+  right: 190px;
+  width:50px; 
+  height:50px;
+  /* margin-top: 4px; */
+  display:inline-block;
+  justify-content:center;
+  align-items:center;
+  border-radius: 100%;
+  padding:0.1rem;
+  border:1px solid rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.566);
+  /* margin-bottom: 1.5rem; */
+}
+#profileImg{
+  max-width:100%; 
+  max-height:100%;
+  border-radius: 100%;
+  display:block;
+}

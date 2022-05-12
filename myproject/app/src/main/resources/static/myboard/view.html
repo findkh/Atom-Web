@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>게시글</title>
-  <style>
-    #x-photo{
-      height: 300px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/myboard/css/form.css" rel="stylesheet">
+  <title>게시글 보기</title>
 </head>
+
 <body>
 
-<h1>게시글 상세</h1>
-
+<div id="header"></div>
 <form name="viewForm">
+<h1>게시글 상세</h1>
 번호: <input id="x-no" type="text" readonly name="no"><br>
 제목*: <input id="x-title" type="text" name="title"><br>
 사진 : <input name="file" type="file"><br>
@@ -27,98 +27,11 @@
 <button id="x-delete-btn" type="button">삭제</button>
 <button id="x-cancel-btn" type="button">취소</button>
 </form>
+<div id="footer"></div>
 
-<script type="text/javascript">
-var arr = location.href.split("?");
-console.log(arr);
-
-if (arr.length == 1) {
-  alert("요청 형식이 올바르지 않습니다.")
-  throw "URL 형식 오류!";
-}
-
-var qs = arr[1];
-console.log(qs);
-
-var params = new URLSearchParams(qs);
-var no = params.get("no");
-
-if (no == null) {
-  alert("게시물 번호가 없습니다.");
-  throw "파라미터 오류!";
-}
-console.log(no);
-
-var xNo = document.querySelector("#x-no");
-var xTitle = document.querySelector("#x-title");
-var xPhoto = document.querySelector("#x-photo");
-var xContent = document.querySelector("#x-content");
-var xWriter = document.querySelector("#x-writer");
-var xViewCount = document.querySelector("#x-viewCount");
-var xCreatedDate = document.querySelector("#x-createdDate");
-console.log(xWriter);
-
-fetch(`/myboard/get?no=${no}`)
-.then(function(response) {
-  return response.json();
-})
-.then(function(board) {
-  console.log(board);
-  xNo.value = board.no;
-  xTitle.value = board.title;
-  xContent.value = board.content;
-  if (board.photo != null) {
-  xPhoto.src="/myboard/photo?filename=" + board.photo;
-  };
-  xWriter.innerHTML = board.writer.name;
-  xViewCount.innerHTML = board.viewCount;
-  xCreatedDate.innerHTML = board.createdDate;
-});
-
-document.querySelector("#x-update-btn").onclick = function() {
-  if (xTitle.value == "" || xContent.value == "") {
-    window.alert("필수 입력 항목이 비어 있습니다.");
-    return;
-  }
-
-  var fd = new FormData(document.forms.namedItem("viewForm"));
-
-  fetch("/myboard/update", {
-    method: "POST",
-    body: fd
-  })
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(result) {
-    if (result.status == "success") {
-      location.href = "index.html";
-    } else {
-      window.alert("게시글 변경 실패!");
-      console.log(result.data);
-    }
-  });
-};
-
-document.querySelector("#x-cancel-btn").onclick = function() {
-  window.location.href = "index.html";
-};
-
-document.querySelector("#x-delete-btn").onclick = function() {
-  fetch(`/myboard/delete?no=${no}`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(result) {
-      if (result.status == "success") {
-      location.href = "index.html";
-    } else {
-      window.alert("게시글 삭제 실패!");
-      console.log(result.data);
-    }
-  });
-};
-</script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/myboard/js/view.js"></script>
 
 </body>
 </html>

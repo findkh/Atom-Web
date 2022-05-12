@@ -1,0 +1,36 @@
+.content {
+  width: 1000px;
+  margin: 0 auto;
+}
+.contentInner {
+  /* border: 1px solid red; */
+  width: 1000px;
+  text-align: center;
+  vertical-align: center;
+  margin-top: 50px;
+}
+#boardTable {
+  /* border: 1px solid blue; */
+  width: 800px;
+  margin: auto;
+}
+table > thead {
+  text-align: center;
+}
+table > tbody > tr > td {
+  text-align: center;
+}
+.btnDiv{
+  /* border: 1px solid red; */
+  width: 900px;
+  text-align: right;
+  margin-top: 5px;
+}
+.list-group{
+  padding: 0px;
+  width: 130px;
+  cursor: pointer;
+}
+.list-group-item{
+  box-shadow: inset;
+}

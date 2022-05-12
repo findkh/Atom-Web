@@ -1,54 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>게시글</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/myboard/css/index.css" rel="stylesheet">
+  <title>My board</title>
 </head>
+
 <body>
-<h1>게시글</h1>
-<a href="form.html">새 게시글</a>
-<table id="x-board-table" border="1">
-<thead>
+<div id="header"></div>
+
+<div class="content">
+  <div class="contentInner">
+      <table class="table table-hover table-sm" id="boardTable">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" width="50px">#</th>
+            <th scope="col" width="400px">Title</th>
+            <th scope="col" width="100px">Witer</th>
+            <th scope="col" width="80px">ViewCount</th>
+            <th scope="col" width="100px">Date</th>
+          </tr>
+        </thead>
+        <tbody style="border: white"></tbody>
+      </table>
+
+      <div class="btnDiv">
+        <button id="create-btn" type="button" class="btn btn-success">등록</button>
+      </div>
+
+      <div class="pagination justify-content-center">
+        <div class="list-group list-group-horizontal">
+          <li class="list-group-item list-group-item-success"><span aria-hidden="true">&laquo;</span></li>
+          <li class="list-group-item list-group-item-success"><span id="sendpageNo">1</span></li>
+          <li class="list-group-item list-group-item-success"><span aria-hidden="true" id="sendnextNo">&raquo;</span></li>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script id="tr-template" type="text/x-handlebars-template">
+  {{#each this}}
   <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>작성자</th>
-    <th>조회수</th>
-    <th>등록일</th>
+    <td>{{no}}</td>
+    <td><a href="view.html?no={{no}}">{{title}}</a></td>
+    <td>{{writer.name}}</td>
+    <td>{{viewCount}}</td>
+    <td>{{createdDate}}</td>
   </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-
-<script type="text/javascript">
-var tbody = document.querySelector("#x-board-table tbody")
-
-fetch("/myboard/list")
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(boards) {
-    console.log(boards);
-    for (var board of boards) {
-      var tr = document.createElement("tr");
-      tr.innerHTML = `<td>${board.no}</td>
-      <td><a href="view.html?no=${board.no}">${board.title}</a></td>
-      <td>${board.writer.name}</td>
-      <td>${board.viewCount}</td>
-      <td>${board.createdDate}</td>`;
-      tbody.appendChild(tr);
-    }
-  });
+  {{/each}}
 </script>
 
-
-
-
-
-
-
-
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/myboard/js/index.js"></script>
 
 </body>
 </html>

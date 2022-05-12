@@ -1,0 +1,24 @@
+.content{
+  width: 1000px;
+  margin: 0 auto;
+}
+.SignupForm{
+  border: 5px double rgba(24, 183, 43, 0.357);
+  width: 700px;
+  margin: 100px auto;
+  padding: 20px;
+}
+.SignupForm > div > div {
+  margin: 0px 50px;
+}
+h3 {
+  text-align: center;
+}
+.groupBtn{
+  text-align: center;
+}
+#addBtn, #cancleBtn{
+  margin: 5px;
+  align-items: center;
+  display: inline-block;
+}

@@ -5,73 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <script src="../node_modules/bootstrap-icons/font/bootstrap-icons.css"></script> -->
-  <title>SignIn</title>
-  <style>
-    .wrapper {
-      border: 1px solid rgba(24, 183, 43, 0.357);
-      margin: 150px 450px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      width: 580px;
-      height: 470px;
-      /* 
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin:-150px 0px 0px -300px;
-      top: 50%;
-      left: 50%; */
-    }
-    /* .SigninForm{
-      border: 1px solid red;
-      
-    } */
-    h3 {
-      text-align: center;
-      font-weight: bolder;
-    }
-    #socialLoginDiv{
-      text-align: center;
-      vertical-align: center;
-    }
-    .facebookDiv{
-      width: 50px;
-      cursor: pointer;
-      display: inline-block;
-    }
-    #facebookIcon{
-      color: rgb(24, 24, 221);
-      text-align: center;
-    }
-    .form-control{
-      border: green 1px solid;
-    }
-    .form-control:focus{
-      border: green 1px solid;
-      box-shadow: none;
-    }
-
-  </style>
+  <link href="/member/css/signin.css" rel="stylesheet">
+  <title>Signin</title>
 </head>
 
 <body>
-<div id="SigninContainer" class="wrapper">
+<div id="header"></div>
+
+<!-- class="wrapper" -->
+<div id="SigninContainer"> 
   <form name="SigninForm" class="SigninForm">    
     <div class="d-grid gap-2 col-6 mx-auto">
-      <h3>Sign In</h3>
-      <div class="mb-3">
+      <h3>Signin</h3>
+      <div class="col-12">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
       </div>
-      <div class="mb-3">
+      <div class="col-12">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
       </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      <div class="col-12 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveEmail">
+        <label class="form-check-label" for="exampleCheck1">Save Email</label>
       </div>
     </div>
 
@@ -89,94 +46,12 @@
     </div>
   </form>
 </div>
-<script>
-var Email = document.querySelector("input[name=email]");
-var PassWord = document.querySelector("input[name=password]");
 
-document.querySelector("form[name=SigninForm]").onsubmit = function() {
-  if (Email.value == "" ||
-      PassWord.value == "") {
-      window.alert("필수 입력 항목이 비어있습니다.")
-      return false;
-  }
-  var fd = new FormData(document.forms.namedItem("SigninForm"));
+<div id="footer"></div>
 
-  fetch("/member/signin", {
-    method : "POST",
-    body : new URLSearchParams(fd)
-  })
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(result) {
-    if (result.status == "success") {
-      location.href = document.referrer;
-    } else {
-      window.alert("로그인 실패!");
-    }
-  })
-  return false;
-}
-
-document.querySelector("#signUpBtn").onclick = function() {
-  window.location.href = "/member/signup.html";
-}
-
-document.querySelector("#cancleBtn").onclick = function() {
-  window.location.href = "../index.html";
-};
-
-//페이스북 로그인
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '702971957572821',
-    cookie     : true,  
-    xfbml      : true,  
-    version    : 'v13.0' 
-  });
-  FB.AppEvents.logPageView();
-};
-
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "https://connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function FacebookLoginFn() {
-  FB.login(function(response) { 
-      if (response.status === 'connected') {            
-
-        var params = new URLSearchParams();
-        params.append("accessToken", response.authResponse.accessToken);
-
-        fetch("/member/fbsingin", {
-          method: "POST",
-          body: params
-        })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(result) {
-          console.log(result);
-          if (result.status == "success") {
-            // console.log(result.data);
-            console.log("자동 로그인 성공!");
-            location.href = document.referrer; 
-          } else {
-            alert("로그인 실패");
-            console.log("result.data");
-          }
-        })
-      } else { // 로그인이 되지 않았을 때,
-          console.log("로그인 되지 않았음");
-      }
-  });
-}
-
-</script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/js-cookie/dist/js.cookie.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/member/js/signin.js"></script>
 </body>
 </html>
