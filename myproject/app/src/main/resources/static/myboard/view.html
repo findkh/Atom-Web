@@ -5,28 +5,57 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/myboard/css/form.css" rel="stylesheet">
+  <link href="/myboard/css/view.css" rel="stylesheet">
   <title>게시글 보기</title>
 </head>
 
 <body>
 
 <div id="header"></div>
-<form name="viewForm">
-<h1>게시글 상세</h1>
-번호: <input id="x-no" type="text" readonly name="no"><br>
-제목*: <input id="x-title" type="text" name="title"><br>
-사진 : <input name="file" type="file"><br>
-내용*: <textarea id="x-content" cols="60" rows="10" name="content"></textarea><br>
-<img id="x-photo" src=""> <br>
-작성자: <span id="x-writer"></span><br>
-조회수: <span id="x-viewCount"></span><br>
-등록일: <span id="x-createdDate"></span><br>
-별표(*) 항목은 필수 입력입니다.<br>
-<button id="x-update-btn" type="button">변경</button>
-<button id="x-delete-btn" type="button">삭제</button>
-<button id="x-cancel-btn" type="button">취소</button>
-</form>
+
+<div class="content">
+  <form class="viewForm" name="viewForm">
+    <h3>View Post</h3>
+    <div class="row g-3 mx-auto">
+      <div class="col-md-6 mx-auto">
+        <label for="inputNo" class="form-label">No</label>
+        <input type="number" class="form-control" id="inputNo" name="no" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" disabled>
+      </div>
+      <div class="col-12">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+      <div class="col-md-6">
+        <label for="writer" class="form-label">Writer</label>
+        <input type="text" class="form-control" id="writer" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="viewCount" class="form-label">ViewCount</label>
+        <input type="number" class="form-control" id="viewCount" disabled>
+      </div>
+      <div class="col-12">
+        <label for="formFile" class="form-label">image</label>
+        <input class="form-control" type="file" id="formFile" name="file">
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height:200px" name="content"></textarea>
+      </div>
+      <div id="photoBox">
+        <img id="x-photo" src=""> <br>
+      </div>
+    </div>
+    <div class="groupBtn">
+      <button type="button" class="btn btn-success" id="updateBtn">Update</button>
+      <button type="button" class="btn btn-success" id="deleteBtn">Delete</button>
+      <button type="button" class="btn btn-success" id="cancleBtn">Cancle</button>
+    </div>
+  </form>
+</div>
+
 <div id="footer"></div>
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>

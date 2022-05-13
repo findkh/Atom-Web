@@ -12,8 +12,8 @@ if (Name.value == "" ||
     window.alert("필수 입력 항목이 비어있습니다.")
     return false;
 }
-var fd = new FormData(document.forms.namedItem("SignupForm"));
-
+  var fd = new FormData(document.forms.namedItem("SignupForm"));
+  
 fetch("/member/signup", {
   method : "POST",
   body : fd

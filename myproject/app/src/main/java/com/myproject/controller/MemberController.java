@@ -4,11 +4,15 @@ import static com.myproject.controller.ResultMap.FAIL;
 import static com.myproject.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -30,8 +34,19 @@ public class MemberController {
   @Autowired
   MemberService memberService;
 
+  //log를 출력하는 도구 준비
+  private static final Logger log = LogManager.getLogger(MemberController.class);
+  //  log.fatal("fatal...");
+  //  log.error("error...");
+  //  log.debug("debug...");
+  //  log.warn("warn..");
+  //  log.info("info...");
+  //  log.trace("trace...");
+
+
   @RequestMapping("/member/signup") 
   public Object singUp(Member member, MultipartFile file) {
+    log.info("회원가입");
     try {
       member.setPhoto(saveFile(file));
       if (memberService.add(member) == 1) {
@@ -40,13 +55,16 @@ public class MemberController {
         return new ResultMap().setStatus(FAIL);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      StringWriter out = new StringWriter();
+      e.printStackTrace(new PrintWriter(out));
+      log.error(out.toString());
       return new ResultMap().setStatus(FAIL).setData(e.getMessage());
     }
   }
 
   @RequestMapping("/member/signin") 
   public Object singIn(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
+    log.info("로그인");
     Member loginUser = memberService.get(email, password);
     if (loginUser == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
@@ -70,6 +88,7 @@ public class MemberController {
   @RequestMapping("/member/fbsingin")
   public Object fbSingIn(String accessToken, HttpSession session) throws Exception{
 
+    log.info("페이스북 로그인");
     //페이스북 서버에 접속하여 사용자 정보를 요구한다.
     RestTemplate restTemplate = new RestTemplate();
     Map<String,String> result = restTemplate.getForObject( //getForObject : get요청을 하는 URL
@@ -103,6 +122,7 @@ public class MemberController {
 
   @RequestMapping("/member/getLoginUser") 
   public Object getLoginUser(HttpSession session) {
+    log.info("로그인 유저 정보 확인");
     Object member = session.getAttribute("loginUser");
     if (member != null) {
       return new ResultMap().setStatus(SUCCESS).setData(member);

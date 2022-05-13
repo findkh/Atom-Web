@@ -1,3 +1,21 @@
 #x-photo{
   height: 300px;
+  border: 1px solid rgba(24, 183, 43, 0.357);;
+}
+.content{
+  width: 1000px;
+  margin: 0 auto;
+}
+.viewForm{
+  border: 5px double rgba(24, 183, 43, 0.357);
+  width: 800px;
+  margin: 70px auto;
+  padding: 40px;
+}
+h3 {
+  text-align: center;
+}
+.groupBtn{
+  text-align: right;
+  margin-top: 20px;
 }

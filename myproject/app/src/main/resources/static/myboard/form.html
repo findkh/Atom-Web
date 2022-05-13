@@ -10,15 +10,33 @@
 </head>
 
 <div id="header"></div>
-<form name="boardForm">
-<h1>새 게시글</h1>
-제목*: <input type="text" name="title"><br>
-사진 : <input name="file" type="file"><br>
-내용*: <textarea cols="60" rows="10" name="content"></textarea><br>
-별표(*) 항목은 필수 입력입니다.<br>
-<button id="x-add-btn" type="button">등록</button>
-<button id="x-cancel-btn" type="button">취소</button>
-</form>
+
+<div class="content">
+  <form name="boardForm" class="boardForm">
+    <div class="d-grid gap-2 col-11 mx-auto">
+      <h3>New Post</h3>
+      <div class="col-12">
+        <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" id="inputTitle" name="title">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="formFile" class="form-label">image</label>
+        <input class="form-control" type="file" id="formFile" name="file">
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height:200px" name="content"></textarea>
+        <label for="floatingTextarea2">Comments</label>
+      </div>
+    </div>
+    <div class="groupBtn">
+      <button type="button" class="btn btn-success" id="cancleBtn">Cancle</button>
+      <button type="button" class="btn btn-success" id="addBtn">Save</button>
+    </div>
+  </form>
+</div>
+
 <div id="footer"></div>
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>

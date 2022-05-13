@@ -4,8 +4,12 @@ import static com.myproject.controller.ResultMap.FAIL;
 import static com.myproject.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -25,13 +29,20 @@ public class myBoardController {
   @Autowired
   myBoardService myboardService;
 
+  //log를 출력하는 도구 준비
+  private static final Logger log = LogManager.getLogger(myBoardController.class);
+
   @RequestMapping("/myboard/list")
   public Object list() {
+    log.info("게시글 목록 조회");
     return new ResultMap().setStatus(SUCCESS).setData(myboardService.list());
   }
 
   @RequestMapping("/myboard/add")
   public Object add(myBoard myboard, MultipartFile file, HttpSession session) {
+    log.info("게시글 등록"); //운영자가 확인하기를 원하는 정보 
+    log.debug(myboard.toString()); //개발자가 확인하기를 원하는 정보
+
     try {
       Member member = (Member) session.getAttribute("loginUser");
       myboard.setWriter(member);
@@ -40,13 +51,16 @@ public class myBoardController {
       return new ResultMap().setStatus(SUCCESS);
 
     } catch (Exception e) {
-      e.printStackTrace();
+      StringWriter out = new StringWriter();
+      e.printStackTrace(new PrintWriter(out));
+      log.error(out.toString());
       return new ResultMap().setStatus(FAIL).setData(e.getMessage());
     }
   }
 
   @RequestMapping("/myboard/get")
   public Object get(int no) {
+    log.info("게시글 조회");
     myBoard board = myboardService.get(no);
     if (board == null) {
       return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않습니다.");
@@ -56,33 +70,35 @@ public class myBoardController {
 
   @RequestMapping("/myboard/update")
   public Object update(myBoard myboard, MultipartFile file, HttpSession session) {
+    log.info("게시글 수정"); //운영자가 확인하기를 원하는 정보 
+    log.debug(myboard.toString()); //개발자가 확인하기를 원하는 정보
+
     Member member = (Member) session.getAttribute("loginUser");
-    if (member == null) {
-      return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
-    }
 
     try {
       myboard.setWriter(member);
       myboard.setPhoto(saveFile(file));
-      int count = myboardService.update(myboard);
 
+      int count = myboardService.update(myboard);
+      System.out.println(count);
       if (count == 1) {
         return new ResultMap().setStatus(SUCCESS);
       } else {
         return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      StringWriter out = new StringWriter();
+      e.printStackTrace(new PrintWriter(out));
+      log.error(out.toString());
       return new ResultMap().setStatus(FAIL).setData(e.getMessage());
     }
   }
 
   @RequestMapping("/myboard/delete")
   public Object delete(int no, MultipartFile file, HttpSession session) {
+    log.info("게시글 삭제"); //운영자가 확인하기를 원하는 정보 
+
     Member member = (Member) session.getAttribute("loginUser");
-    if (member == null) {
-      return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
-    }
 
     myBoard myboard = new myBoard();
     myboard.setNo(no);

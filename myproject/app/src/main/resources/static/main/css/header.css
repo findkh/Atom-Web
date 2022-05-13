@@ -18,6 +18,12 @@
   position: relative;
   min-width: 600px; 
 }
+#navbarSupportedContent{
+  height: 60px;
+  margin-top: 0px;
+  width: 300px;
+  padding: 20px;
+}
 .inner > .navbar-brand{
   color: white;
   margin-left: 30px;
@@ -32,13 +38,11 @@
   font-weight: bold;
   float: left;
 }
-.inner > .collapse {
-  margin-top: 12px;
-}
-.dropdown-menu {
+.dropdown-menu {  
   background-color: rgba(24, 183, 43, 0.357);
 }
 .dropdown-item {
+  /* margin-top: 50px; */
   background-color: rgba(24, 183, 43, 0);
   color: white;
 }
@@ -80,11 +84,11 @@
 #userNameDiv{
   position: absolute;
   right: 123px;
-  margin-top: 12px;
+  margin-top: 15px;
   width: 65px;
   height: 40px;
   display:inline-block;
-  text-align: center
+  text-align: center;
 }
 #userName {
   position: block;
@@ -92,7 +96,7 @@
   right: 123px;
   height: 40px;
   color: white;
-  margin-top: 12px;
+  margin-top: 18px;
   font-size: 18px;
 }
 #profile{
