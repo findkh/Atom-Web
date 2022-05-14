@@ -9,15 +9,16 @@
       - 서버 기술 : SpringBoot, MyBatis, mariaDB
       - 화면 기술 : HTML, CSS, JavaScript, Bootstrap, handlebars, JQuery, js-cookie
       - 개발 도구 : Eclipse, VScode
-      - 개발 과정
----
+      - [개발 과정 README.md 보기](https://github.com/findkh/WebProject/tree/main/myproject/app/src/main)
+#
 ## myboard 📑
   - 🆗 회원 가입  
     > <span style="color:red">✔</span> 일반 회원 회원 가입 구현  
   - 🆗 로그인 구현  
     > <span style="color:red">✔</span> 일반 회원 로그인 구현  
-    > <span style="color:red">✔</span> 일반 회원 로그인시 등록된 회원 사진이 Header에 출력되게 구현  
-    > <span style="color:red">✔</span> facebook 로그인 구현 
+    > <span style="color:red">✔</span> facebook 로그인 구현   
+    > <span style="color:red">✔</span> 일반 회원 로그인시 등록된 회원 사진이 Header에 출력되게 구현
+    > - 파일 입출력 구현   
   - 🆗 bootstrap 적용(익숙해지기)
     > <span style="color:red">✔</span> 팀 프로젝트 때 form 양식을 테이블로 사용하였는데, 테이블이 아닌 input 태그로 구현함.  
     > <span style="color:red">✔</span> header와 footer구현하기
