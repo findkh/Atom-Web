@@ -7,7 +7,7 @@
     </Console>
   </Appenders>
   <Loggers> 
-	  <Logger name="com.myproject" level="debug"> <!-- com.myproject 밑에 있는 클래스를 실행할 때는 debug로 실행해라 -->
+	  <Logger name="com.myproject" additivity="false" level="debug"> <!-- com.myproject 밑에 있는 클래스를 실행할 때는 debug로 실행해라 -->
 	    <AppenderRef ref="stdout" />
 	  </Logger>
     <Root level="info"> <!-- 기본 레벨은 info -->

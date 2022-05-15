@@ -21,8 +21,8 @@ public class DefaultmyBoardService implements myBoardService{
   }
 
   @Override
-  public List<myBoard> list() {
-    return myboardDao.findAll();
+  public List<myBoard> list(int pageSize, int pageNo) {
+    return myboardDao.findAll(pageSize, ((pageNo - 1) * pageSize));
   }
 
   @Override
@@ -44,5 +44,10 @@ public class DefaultmyBoardService implements myBoardService{
   @Transactional
   public int delete(myBoard myboard) {
     return myboardDao.delete(myboard);
+  }
+
+  @Override
+  public int size() {
+    return myboardDao.countAll();
   }
 }

@@ -33,9 +33,42 @@ public class myBoardController {
   private static final Logger log = LogManager.getLogger(myBoardController.class);
 
   @RequestMapping("/myboard/list")
-  public Object list() {
+  public Object list(int pageSize, int pageNo, HttpSession session) {
     log.info("게시글 목록 조회");
-    return new ResultMap().setStatus(SUCCESS).setData(myboardService.list());
+    Member member = (Member) session.getAttribute("loginUser");
+
+    try {
+      if (pageSize < 10 || pageSize > 100) {
+        pageSize = 10;
+      }
+    } catch (Exception e) {}
+
+    int listSize = myboardService.size();
+
+
+    int totalPageSize = listSize / pageSize;
+
+    try {
+      if ((listSize % pageSize) > 0) {
+        totalPageSize++;
+      }
+    } catch (Exception e) {}
+
+    try {
+      if (pageNo < 1 || pageNo > totalPageSize) {
+        pageNo = 1;
+      }
+    } catch (Exception e) {}
+
+    //    log.info("게시글 개수 count : " + listSize);
+    //    log.info("totalpageSize : " + totalPageSize);
+
+    return new ResultMap()
+        .setStatus(SUCCESS)
+        .setTotalListCount(totalPageSize)
+        .setPageNo(pageNo)
+        .setTotalPageSize(totalPageSize)
+        .setData(myboardService.list(pageSize, pageNo));
   }
 
   @RequestMapping("/myboard/add")

@@ -161,7 +161,16 @@
 ## log4j 정리
   - 이론 : https://blog.naver.com/watermoon14/222731395408
   - 적용완료 
-  
-
+---
+# 20220515 - 페이징
+## 백엔드 myboard 페이징처리 후 log4j2 출력문 수정
+  - Controller에 paging 처리함
+    - size() 메서드 추가
+    - sql에 offset과 rowCount 추가
+  - log4j2 출력문 수정
+    <img src="https://user-images.githubusercontent.com/89373222/168474219-c99bc96f-c598-4a37-abfb-2c39b5aef938.png">
+      - 로그가 2번씩 출력됨 
+      - 로거는 상위의 모든 로거가 출력되기 때문에 root 로거와 jdbc.sqlonly 로거 두개가 똑같이 출력된다.  
+      - 수정 : additivity 속성을 false로 하면 상위 로거를 찾지 않아 로그가 1개만 출력된다.
 
   
