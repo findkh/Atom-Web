@@ -13,7 +13,7 @@
 #
 ## myboard 📑
   - 🆗 회원 가입  
-    > <span style="color:red">✔</span> 일반 회원 회원 가입 구현  
+    > <span style="color:red">✔</span> 일반 회원 가입 구현  
   - 🆗 로그인 구현  
     > <span style="color:red">✔</span> 일반 회원 로그인 구현  
     > <span style="color:red">✔</span> facebook 로그인 구현   
@@ -21,7 +21,10 @@
     > - 파일 입출력 구현   
   - 🆗 bootstrap 적용(익숙해지기)
     > <span style="color:red">✔</span> 팀 프로젝트 때 form 양식을 테이블로 사용하였는데, 테이블이 아닌 input 태그로 구현함.  
-    > <span style="color:red">✔</span> header와 footer구현하기
-  - 🆗 main index에서 header와 footer 분리하여 board에 적용하기 
+    > <span style="color:red">✔</span> header와 footer 구현하기
+  - 🆗 main index에서 header와 footer 분리하여 board에 적용
     > <span style="color:red">✔</span> 자바스크립트를 사용하여 적용하였다가 코드가 길어지고 유지보수의 어려움이 있을 것 같아서 제이쿼리로 페이지에 적용
+  - 🆗 인터셉터와 log4j2 적용
+    > <span style="color:red">✔</span> 인터셉터 기능 제대로 활용하기. 팀프로젝트 때 이해하지 못했던 것 제대로 이해함  
+    > <span style="color:red">✔</span> 팀프로젝트때 logback을 사용했는데 log4j2로 변경
   - 페이지네이션 적용
