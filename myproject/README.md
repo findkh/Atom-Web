@@ -4,14 +4,14 @@
   - 프론트와 백엔드를 분리하여 개발하였습니다.
     - main index, myboard
       - 📅 시작 : 2022-05-09(월)
-      - 📅 종료 : 2022-05-16(월) 예정
+      - 📅 종료 : 2022-05-16(월)
       - 목표 : 팀프로젝트 때 제이쿼리를 사용하여 개발하였는데 가능하면 자바스크립트를 이용하여 개발하려 노력하였습니다.
       - 서버 기술 : SpringBoot, MyBatis, mariaDB
       - 화면 기술 : HTML, CSS, JavaScript, Bootstrap, handlebars, JQuery, js-cookie
-      - 개발 도구 : Eclipse, VScode
-      - [개발 과정 README.md 보기](https://github.com/findkh/WebProject/tree/main/myproject/app/src/main)
+      - 개발 도구 : Eclipse, VScode, Atom
+      - [개발 과정 README.md 보기](https://github.com/findkh/WebProject/tree/main/myproject/app)
 #
-## myboard 📑
+## 1차 myboard 📑
   - 🆗 회원 가입  
     > <span style="color:red">✔</span> 일반 회원 가입 구현  
   - 🆗 로그인 구현  
@@ -27,4 +27,5 @@
   - 🆗 인터셉터와 log4j2 적용
     > <span style="color:red">✔</span> 인터셉터 기능 제대로 활용하기. 팀프로젝트 때 이해하지 못했던 것 제대로 이해함  
     > <span style="color:red">✔</span> 팀프로젝트때 logback을 사용했는데 log4j2로 변경
-  - 페이지네이션 적용
+  - 🆗 페이지네이션 적용
+    > <span style="color:red">✔</span> 페이징처리할 때 숫자 값 메서드 활용하여 코드를 줄임.

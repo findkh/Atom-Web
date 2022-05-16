@@ -18,7 +18,7 @@ public class AuthInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
-    log.trace("preHandler() 호출됨");
+    log.info("preHandler() 호출됨");
     //로그인 여부 검사
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");

@@ -32,6 +32,8 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'junit:junit:4.13.2'
+  implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
 //﻿logback 제외
@@ -47,7 +49,7 @@ test {
 
 // eclipse 프로젝트 이름을 설정하기
 eclipse {
-    project {
-        name = "myproject"
-    }
+  project {
+      name = "myproject"
+  }
 }

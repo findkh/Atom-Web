@@ -12,8 +12,10 @@
   margin: 70px auto;
   padding: 40px;
 }
-h3 {
+.spanTitle {
   text-align: center;
+  font-weight: bolder;
+  font-size: 25px;
 }
 .groupBtn{
   text-align: right;

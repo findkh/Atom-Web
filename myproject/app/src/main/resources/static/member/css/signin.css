@@ -8,9 +8,10 @@
   margin: 100px auto;
   padding: 20px;
 }
-h3 {
+.spanTitle {
   text-align: center;
   font-weight: bolder;
+  font-size: 25px;
 }
 #socialLoginDiv{
   text-align: center;

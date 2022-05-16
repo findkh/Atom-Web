@@ -1,4 +1,3 @@
-
 package com.myproject;
 
 import org.springframework.boot.SpringApplication;

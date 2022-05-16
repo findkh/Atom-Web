@@ -2,7 +2,6 @@ $("#header").load("/main/header.html");
 $("#footer").load("/main/footer.html");
 
 var arr = location.href.split("?");
-console.log(arr);
 
 if (arr.length == 1) {
   alert("요청 형식이 올바르지 않습니다.")
@@ -10,7 +9,6 @@ if (arr.length == 1) {
 }
 
 var qs = arr[1];
-// console.log(qs);
 
 var params = new URLSearchParams(qs);
 var no = params.get("no");
@@ -19,12 +17,10 @@ if (no == null) {
   alert("게시물 번호가 없습니다.");
   throw "파라미터 오류!";
 }
-// console.log(no);
 
 var xNo = document.querySelector("#inputNo");
 var xTitle = document.querySelector("#title");
 var PhotoBox = document.querySelector("#photoBox")
-console.log(PhotoBox);
 var xPhoto = document.querySelector("#x-photo");
 var xContent = document.querySelector("#floatingTextarea2");
 var xWriter = document.querySelector("#writer");
@@ -41,7 +37,6 @@ fetch(`/myboard/get?no=${no}`)
     console.log(result.data);
     return;
   }
-  console.log(result.data);
   xNo.value = result.data.no;
   xTitle.value = result.data.title;
   xContent.value = result.data.content;
@@ -53,7 +48,18 @@ fetch(`/myboard/get?no=${no}`)
   xWriter.value = result.data.writer.name;
   xViewCount.value = result.data.viewCount;
   xCreatedDate.value = result.data.createdDate;
-});
+  fetch("/member/getLoginUser").then(function(response) {
+    return response.json();
+  })
+    .then(function (result) {
+    if (result.status == "fail" || result.data.name != xWriter.value ) {
+      document.querySelector("#updateBtn").style.display = "none";
+      document.querySelector("#deleteBtn").style.display = "none";
+      }
+    });
+});  
+
+
 
 document.querySelector("#updateBtn").onclick = function() {
   if (xTitle.value == "" || xContent.value == "") {

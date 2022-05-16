@@ -11,8 +11,10 @@
 .SignupForm > div > div {
   margin: 0px 50px;
 }
-h3 {
+.spanTitle {
   text-align: center;
+  font-weight: bolder;
+  font-size: 25px;
 }
 .groupBtn{
   text-align: center;

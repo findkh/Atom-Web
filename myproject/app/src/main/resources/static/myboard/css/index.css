@@ -29,7 +29,6 @@ table > tbody > tr > td {
 .list-group{
   padding: 0px;
   width: 130px;
-  cursor: pointer;
 }
 .list-group-item{
   box-shadow: inset;
