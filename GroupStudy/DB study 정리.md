@@ -45,7 +45,7 @@ DEFAULT는 INSERT를 수행할 때 컬럼의 값이 지정되지 않으면 자�
 영속성(Durability) : 성공이 완료된 트랜잭션의 결과는 영속적으로 데이터베이스에 저장하는 특성입니다.
 
 ## 6. COMMIT, ROLLBACK 설명
-- COMMIT은 트랜잭션의 확정으로 트랜잭션을 메모리에 영구적으로 저장하는 명령어이고 ROLLBACK은 트랜잭션 내역을 저장 무효화 시키는 명령어입니다.
+- COMMIT은 트랜잭션의 확정으로 트랜잭션을 메모리에 영구적으로 저장하는 명령어이고 ROLLBACK은 트랜잭션 내역을 무효화 시키는 명령어입니다.
 
 ## 7. CRUD(CREATE, READ, UPDATE, DELETE)
 - CRUD는 컬럼을 조회, 삽입, 갱신, 삭제하는 것으로 SQL 명령어는 SELECT, INSERT, UPDATE, DELETE가 있습니다.
