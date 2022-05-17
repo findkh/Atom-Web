@@ -2,32 +2,18 @@ package com.hyun.myproject2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.Servlet;
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-//서블릿 컨테이너가 실행할 클래스를 만드려면
-//Servlet API 규칙에 따라 작성해야 한다.
-//
-@WebServlet("/hello") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다.
-public class HelloServlet implements Servlet {
+@SuppressWarnings("serial")
+@WebServlet("/hello2") 
+public class HelloServlet2 extends GenericServlet { //추상 클래스를 상속받는다.
 
   ServletConfig config;
-
-  @Override 
-  public void init(ServletConfig config) throws ServletException {
-    System.out.println("init() 호출");
-    this.config = config;
-  }
-
-  @Override
-  public ServletConfig getServletConfig() {
-    System.out.println("getServletConfig() 호출!");
-    return this.config;
-  }
 
   @Override
   public void service(ServletRequest req, ServletResponse res)
@@ -46,16 +32,5 @@ public class HelloServlet implements Servlet {
 
     //HTTP 클라이언트에게 콘텐트를 출력한다.
     out.printf("%s님 환영합니다", name);  
-  }
-
-  @Override
-  public String getServletInfo() {
-    System.out.println("getServletInfo() 호출!");
-    return "HelloServlet";
-  }
-
-  @Override
-  public void destroy() {
-    System.out.println("destroy() 호출!");
   }
 }
