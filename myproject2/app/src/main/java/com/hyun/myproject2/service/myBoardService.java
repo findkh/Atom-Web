@@ -14,5 +14,4 @@ public interface myBoardService {
 
   int delete(myBoard myboard);
 
-  int size();
 }

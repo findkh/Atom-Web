@@ -49,7 +49,8 @@ public class myBoardDetailServlet extends HttpServlet { //추상 클래스를 �
     out.println("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p\" crossorigin=\"anonymous\"></script>");
     out.println("<link href=\"/css/header.css\" rel=\"stylesheet\">");
     out.println("<link href=\"/css/footer.css\" rel=\"stylesheet\">");
-    out.println("<link href=\"/css/myboardview.css\" rel=\"stylesheet\">");
+    out.println("<link href=\"/css/myboardindex.css\" rel=\"stylesheet\">");
+    out.println("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css\">");
     out.println("<title>My board</title>");
     out.println("</head>");
 
@@ -86,9 +87,10 @@ public class myBoardDetailServlet extends HttpServlet { //추상 클래스를 �
     out.println("</div>");
     out.println("</nav>");
     out.println("</div>");
+    out.println("</div>");
 
     out.println("<div class=\"content\">");
-    out.println("<form class=\"viewForm\" name=\"viewForm\">");
+    out.println("<form class=\"viewForm\" name=\"viewForm\" action='update' method='post'>");
     out.println("<div class=\"row g-3 mx-auto\">");
     out.println("<span class=\"spanTitle\">View Post</span>");
 
@@ -98,7 +100,7 @@ public class myBoardDetailServlet extends HttpServlet { //추상 클래스를 �
 
     out.println("<div class=\"col-md-6 mx-auto\">");
     out.println("<label for=\"inputNo\" class=\"form-label\">No</label>");
-    out.printf("<input type=\"number\" class=\"form-control\" name=\"no\" value='%d' disabled>", myboard.getNo());
+    out.printf("<input name=\"no\" class=\"form-control\" type=\"text\" value='%d' readonly>", myboard.getNo());
     out.println("</div>");
     out.println("<div class=\"col-md-6\">");
     out.println("<label for=\"date\" class=\"form-label\">Date</label>");
@@ -128,7 +130,7 @@ public class myBoardDetailServlet extends HttpServlet { //추상 클래스를 �
     out.println("</div>");
     out.println("</div>");
     out.println("<div class=\"groupBtn\">");
-    out.println("<button type=\"button\" class=\"btn btn-success\" id=\"updateBtn\">Update</button>");
+    out.println("<button type=\"submit\" class=\"btn btn-success\" id=\"updateBtn\">Update</button>");
     out.println("<button type=\"button\" class=\"btn btn-success\" id=\"deleteBtn\">Delete</button>");
     out.println("<button type=\"button\" class=\"btn btn-success\" id=\"cancleBtn\">Cancle</button>");
     out.println("</div>");
@@ -154,6 +156,16 @@ public class myBoardDetailServlet extends HttpServlet { //추상 클래스를 �
     out.println("</div>");
     out.println("</nav>");
     out.println("</div>");
+
+    out.println("</div>");
+    out.println("<script>");
+    out.println("document.querySelector('#deleteBtn').onclick = () => {");
+    out.println("  location.href = 'delete?no=' + document.querySelector('input[name=no]').value;");
+    out.println("}");
+    out.println("document.querySelector('#cancleBtn').onclick = () => {");
+    out.println("  location.href = 'list';");
+    out.println("}");
+    out.println("</script>");
 
     out.println("</body>");
     out.println("</html>");

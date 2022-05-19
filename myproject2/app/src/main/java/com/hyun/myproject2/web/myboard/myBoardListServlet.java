@@ -29,14 +29,9 @@ public class myBoardListServlet extends HttpServlet { //추상 클래스를 상�
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
-    List<myBoard> boards = myboardService.list();
-    for (myBoard board : boards) {
-      System.out.println(board.getTitle());
-    }
-
     resp.setContentType("text/html;charset=UTF-8");
     PrintWriter out = resp.getWriter();
-    out.println("게시글 목록");
+
 
     out.println("<!DOCTYPE html>");
     out.println("<html lang=\"en\">");
@@ -49,13 +44,13 @@ public class myBoardListServlet extends HttpServlet { //추상 클래스를 상�
     out.println("<link href=\"/css/header.css\" rel=\"stylesheet\">");
     out.println("<link href=\"/css/footer.css\" rel=\"stylesheet\">");
     out.println("<link href=\"/css/myboardindex.css\" rel=\"stylesheet\">");
+    out.println("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css\">");
     out.println("<title>My board</title>");
     out.println("</head>");
 
     out.println("<body>");
     out.println("<div id=\"header\">");
-    out.println("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css\">");
-    out.println("<link href=\"/main/css/header.css\" rel=\"stylesheet\">");
+
 
     out.println("<div id=\"header\">");
     out.println("<nav class=\"navbar fixed-top navbar-expand-lg\">");
@@ -104,6 +99,7 @@ public class myBoardListServlet extends HttpServlet { //추상 클래스를 상�
     out.println("</thead>");
     out.println("<tbody style=\"border: white\">");
 
+    List<myBoard> boards = myboardService.list();
     for (myBoard board : boards) {
       out.println("<tr>");
       out.printf("<td>%d</td>\n", board.getNo());
@@ -118,16 +114,9 @@ public class myBoardListServlet extends HttpServlet { //추상 클래스를 상�
     out.println("</table>");
 
     out.println("<div class=\"btnDiv\">");
-    out.println("<button id=\"create-btn\" type=\"button\" class=\"btn btn-success\">Add</button>");
+    out.println("<button id=\"createBtn\" type=\"button\" class=\"btn btn-success\">Add</button>");
     out.println("</div>");
 
-    out.println("<div class=\"pagination justify-content-center\">");
-    out.println("<div class=\"list-group list-group-horizontal\">");
-    out.println("<li class=\"list-group-item list-group-item-success\" style=\"cursor: pointer;\" id=\"preNoLi\"><span aria-hidden=\"true\" id=\"preNo\">&laquo;</span></li>");
-    out.println("<li class=\"list-group-item list-group-item-success\"><span id=\"pageNo\"></span></li>");
-    out.println("<li class=\"list-group-item list-group-item-success\" style=\"cursor: pointer;\" id=\"nextNoLi\"><span aria-hidden=\"true\" id=\"nextNo\">&raquo;</span></li>");
-    out.println("</div>");
-    out.println("</div>");
     out.println("</div>");
     out.println("</div>");
 
@@ -150,6 +139,13 @@ public class myBoardListServlet extends HttpServlet { //추상 클래스를 상�
     out.println("</div>");
     out.println("</nav>");
     out.println("</div>");
+
+    out.println("</div>");
+    out.println("<script>");
+    out.println("document.querySelector('#createBtn').onclick = () => {");
+    out.println("  location.href ='add';");
+    out.println("}");
+    out.println("</script>");
 
     out.println("</body>");
     out.println("</html>");
