@@ -27,16 +27,21 @@ public class myBoardDeleteServlet extends HttpServlet { //추상 클래스를 �
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    try {
+      myBoard myboard = new myBoard();
+      myboard.setNo(Integer.parseInt(req.getParameter("no")));
 
-    myBoard myboard = new myBoard();
-    myboard.setNo(Integer.parseInt(req.getParameter("no")));
+      Member loginUser = (Member)req.getSession().getAttribute("loginUser");
+      myboard.setWriter(loginUser);
 
-    Member loginUser = (Member)req.getSession().getAttribute("loginUser");
-    myboard.setWriter(loginUser);
+      myboardService.delete(myboard);
+      System.out.println(myboardService.delete(myboard));
 
-    myboardService.delete(myboard);
-    System.out.println(myboardService.delete(myboard));
+      resp.sendRedirect("list");
 
-    resp.sendRedirect("list");
+    } catch (Exception e) {
+      req.setAttribute("exception", e);
+      req.getRequestDispatcher("/error").forward(req, resp);
+    }
   }
 }
