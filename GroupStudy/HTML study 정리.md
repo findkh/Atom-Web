@@ -6,7 +6,7 @@
 같은 동작을 하는 프로그램을 더욱 짧은 코드로 구현 할 수 있고, 오픈 라이센스이기 때문에 누구나 자유롭게 사용할 수 있습니다. 
 
 ## 2. DOM은 무엇인가? **(Dom tree node attribute)
-DOM(The Document Object Model)이란 HTML, XML 문서의 프로그래밍 interface입니다.
+- DOM(The Document Object Model)이란 HTML, XML 문서의 프로그래밍 interface입니다.
 DOM은 문서의 구조화된 표현을 제공하며 프로그래밍언어가 DOM 구조에 접근할 수 있는 방법을 제공하여 문서 구조, 스타일, 내용 등을 변경할 수 있게 돕습니다.
 
 ## 3. Ajax
@@ -20,5 +20,16 @@ DOM은 문서의 구조화된 표현을 제공하며 프로그래밍언어가 DO
 block은 무조건 한줄을 점유하고 다음 태그는 다음 줄로 보냅니다.  
 inline-block은 inline과 block의 성질이 섞여 있어서 위에 언급한 inline에서 적용할 수 없는 것들 적용할 수 있습니다.
 
-## 6. Node.js **
-- 
+## 6. Node.js
+- `Chrome V8 javascript 엔진으로 빌드된 javascript 런타임입니다.` 즉 노드를 통해 애플리케이션을 실행할 수 있으며 서버를 실행하는데 제일 많이 사용된다.  
+  Node.js는 JavaScript를 서버에서도 사용할 수 있도록 만든 프로그램이다.  
+  Node.js는 V8이라는 JavaScript 엔진 위에서 동작하는 자바스크립트 런타임(환경)이다.  
+  Node.js는 서버사이트 스크립트 언어가 아니다. 프로그램(환경)이다.  
+  Node.js는 웹서버와 같이 확장성 있는 네트워크 프로그램을 제작하기 위해 만들어졌다.  
+  (런타임은 특정 언어로 만든 프로그램들을 실행할 수 있는 환경을 뜻합니다. 따라서 노드는 자바스크립트 프로그램을 컴퓨터에서 실행할 수 있다. 쉽게 말해 노드는 자바스크립트 실행기 입니다.)
+
+  Node.js는 REPL(Read, Eval, Print, Loop)을 통해서 런타임을 제공한다.  
+  Read: 유저의 입력 값을 받아서 메모리에 저장
+  Eval: 입력 값의 평가, 실행
+  Print: Eval로 인해 반환된 값을 출력
+  Loop: 1~3을 반복.

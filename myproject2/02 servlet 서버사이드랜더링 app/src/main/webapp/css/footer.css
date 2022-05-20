@@ -1,0 +1,25 @@
+#footer{
+  position: relative;
+  height: 70px;
+  /* display: flex; */
+  /* transform: translateY(-100%); */
+}
+.footerNavbar{
+  padding-bottom: 0px;
+  background-color: white;
+}
+.footerNavbarinner{
+  background-color: rgba(24, 183, 43, 0.357);
+  width: 1000px;
+  height: 70px;
+  margin: 0 auto;
+}
+.footerContent{
+  text-align: center;
+  vertical-align: center;
+  margin : 10px
+}
+.footerContent > span > a {
+  text-decoration: none;
+  color: white;
+}

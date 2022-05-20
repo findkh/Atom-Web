@@ -21,4 +21,29 @@
   - myBoardAddServlet, myBoardDeleteServlet, myBoardDetailServlet, myBoardListServlet,  myBoardUpdateServlet에 header와 footer 코드가 중복된다.  
   서블릿을 재사용하여 중복 코드를 줄이기 위해 Header와 footer Servlet을 분리한다.
   - 인클루드와 포워드의 활용
-  - filter 활용하여 UTF-8로 인코딩하는 코드를 줄인다.
+  - filter 활용하여 UTF-8로 인코딩하는 코드를 줄인다.  
+- 05.20.
+  - 기존에 작성한 코드에 jsp 적용하고, header와 footer를 인클루드한다.
+  - MVC1 초기모델 
+    자바코드를 scriptlet element라는 특수한 언어로 자바코드를 가둬두어야 한다.
+    ``` java
+    <tbody style="border: white">
+    <%
+    myBoardService myboardService = (myBoardService) application.getAttribute("myboardService");
+    List<myBoard> boards = myboardService.list();
+    for (myBoard board : boards) {
+    %>
+      <tr>
+        <td><%=board.getNo()%></td>
+        <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
+        <td><%=board.getWriter().getName()%></td>
+        <td><%=board.getViewCount()%></td>
+        <td><%=board.getCreatedDate() %></td>
+      </tr>
+    <%
+    }
+    %>
+    </tbody>
+    ```
+    자바코드를 scriptlet element라는 특수한 언어로 자바코드를 가둬두어야 한다.
+
