@@ -2,7 +2,6 @@ package com.hyun.myproject2.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import com.hyun.myproject2.domain.myBoard;
 
 @Mapper
@@ -10,7 +9,9 @@ public interface myBoardDao {
 
   int countAll();
 
-  List<myBoard> findAll(@Param("rowCount") int rowCount, @Param("offset") int offset);
+  List<myBoard> findAll();
+
+  //  List<myBoard> findAll(@Param("rowCount") int rowCount, @Param("offset") int offset);
 
   int insert(myBoard myboard);
 

@@ -32,7 +32,7 @@
       inner join my_member m on (b.writer = m.no)
     order by 
       b.board_no desc
-      limit #{offset}, #{rowCount}
+      <!--limit #{offset}, #{rowCount}-->
   </select>
   
   <select id="findByNo" resultMap="myboardMap" parameterType="int">

@@ -1,5 +1,6 @@
 <%@page import="com.hyun.myproject2.domain.myBoard"%>
 <%@page import="java.util.List"%>
+<%@page import="com.hyun.myproject2.service.myBoardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/myboardindex.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-<title>My board2</title>
+<title>My board</title>
 </head>
 <body>
 
@@ -36,15 +37,38 @@
 </thead>
 <tbody style="border: white">
 <%
-int pageNo = (int) request.getAttribute("pageNo");
-int pageSize = (int) request.getAttribute("pageSize");
-int totalPageSize = (int) request.getAttribute("totalPageSize");
-List<myBoard> boards = (List<myBoard>) request.getAttribute("list");
+myBoardService myboardService = (myBoardService) application.getAttribute("myboardService");
+
+int pageNo = 1;
+int pageSize = 5;
+int totalPageSize = 0;
+
+try {
+  pageSize = Integer.parseInt(request.getParameter("pageSize"));
+  if (pageSize < 5 || pageSize > 100) {
+    pageSize = 5;
+  }
+} catch (Exception e) {}
+
+int myboardSize = myboardService.size();
+totalPageSize = myboardSize / pageSize;
+if ((myboardSize % pageSize) > 0) {
+  totalPageSize++;
+}
+
+try {
+  pageNo = Integer.parseInt(request.getParameter("pageNo"));
+  if (pageNo < 1 || pageNo > totalPageSize) {
+    pageNo = 1;
+  }
+} catch (Exception e) {}
+
+List<myBoard> boards = myboardService.list(pageSize, pageNo);
 for (myBoard board : boards) {
 %>
   <tr>
     <td><%=board.getNo()%></td>
-    <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
+    <td><a href='view.jsp?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
     <td><%=board.getWriter().getName()%></td>
     <td><%=board.getViewCount()%></td>
     <td><%=board.getCreatedDate() %></td>
@@ -57,13 +81,13 @@ for (myBoard board : boards) {
 <div class="pagination justify-content-center">
   <div class="list-group list-group-horizontal">
     <%if (pageNo > 1) {%>
-    <li class="list-group-item list-group-item-success"><a href="list?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">&laquo;</a></li>
+    <li class="list-group-item list-group-item-success"><a href="list.jsp?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">&laquo;</a></li>
     <%} else {%>
     <li class="list-group-item list-group-item-success">&laquo;</li>
     <%} %>
     <li class="list-group-item list-group-item-success"><span><%=pageNo%></span></li>
     <%if (pageNo < totalPageSize) {%>
-    <li class="list-group-item list-group-item-success"><a href="list?pageNo=<%=pageNo + 1%>&pageSize=<%=pageSize%>">&raquo;</a></li>
+    <li class="list-group-item list-group-item-success"><a href="list.jsp?pageNo=<%=pageNo + 1%>&pageSize=<%=pageSize%>">&raquo;</a></li>
     <%} else {%>
     <li class="list-group-item list-group-item-success">&raquo;</li>
     <%} %>
@@ -81,7 +105,7 @@ for (myBoard board : boards) {
 
 <script>
 document.querySelector('#createBtn').onclick = () => {
-  location.href ='add';
+  location.href ='form.jsp';
 }
 </script>
 </body>

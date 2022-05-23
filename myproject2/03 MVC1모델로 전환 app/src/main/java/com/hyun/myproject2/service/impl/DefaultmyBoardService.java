@@ -31,13 +31,10 @@ public class DefaultmyBoardService implements myBoardService{
   }
 
   @Override
-  public List<myBoard> list(int pageSize, int pageNo) {
-    try (SqlSession session = sqlSessionFactory.openSession();) {
-      myBoardDao myboardDao = session.getMapper(myBoardDao.class);
-      return myboardDao.findAll(pageSize, ((pageNo - 1) * pageSize));
-    } catch (RuntimeException e) {
-      throw e;
-    }
+  public List<myBoard> list() {
+    SqlSession session = sqlSessionFactory.openSession();
+    myBoardDao myboardDao = session.getMapper(myBoardDao.class);
+    return myboardDao.findAll();
   }
 
   @Override
@@ -80,16 +77,6 @@ public class DefaultmyBoardService implements myBoardService{
       session.commit();
       return count;
 
-    } catch (RuntimeException e) {
-      throw e;
-    }
-  }
-
-  @Override
-  public int size() {
-    try (SqlSession session = sqlSessionFactory.openSession();) {
-      myBoardDao myboardDao = session.getMapper(myBoardDao.class);
-      return myboardDao.countAll();
     } catch (RuntimeException e) {
       throw e;
     }

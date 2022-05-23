@@ -6,14 +6,12 @@ import com.hyun.myproject2.domain.myBoard;
 public interface myBoardService {
   int add(myBoard myboard);
 
-  List<myBoard> list(int pageSize, int pageNo);
+  List<myBoard> list();
 
   myBoard get(int no);
 
   int update(myBoard myboard);
 
   int delete(myBoard myboard);
-
-  int size();
 
 }
