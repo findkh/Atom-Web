@@ -1,4 +1,3 @@
-<%@page import="com.hyun.myproject2.domain.myBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -22,29 +21,26 @@
 </div>
 
 <div class="content">
-<%
-myBoard myboard = (myBoard) request.getAttribute("myboard");
-%>
 <form class="viewForm" name="viewForm" action='update' method='post'>
 <div class="row g-3 mx-auto">
-<span class="spanTitle">View Post</span>
+<span class="spanTitle">View Post4</span>
 <div class="col-md-6 mx-auto">
 <label for="inputNo" class="form-label">No</label>
-<input name="no" class="form-control" type="text" value='<%=myboard.getNo()%>' readonly></div>
+<input name="no" class="form-control" type="text" value='${myboard.no}' readonly></div>
 <div class="col-md-6">
 <label for="date" class="form-label">Date</label>
-<input type="date" class="form-control" value='<%=myboard.getCreatedDate()%>' disabled></div>
+<input type="date" class="form-control" value='${myboard.createdDate}' disabled></div>
 <div class="col-12">
 <label for="title" class="form-label">Title</label>
-<input type="text" class="form-control" name="title" value='<%=myboard.getTitle()%>'></div>
+<input type="text" class="form-control" name="title" value='${myboard.title}'></div>
 <div class="col-md-6">
 <label for="writer" class="form-label">Writer</label>
-<input type="text" class="form-control" value='<%=myboard.getWriter().getName()%>' disabled></div>
+<input type="text" class="form-control" value='${myboard.writer.name}' disabled></div>
 <div class="col-md-6">
 <label for="viewCount" class="form-label">ViewCount</label>
-<input type="number" class="form-control" value='<%=myboard.getViewCount()%>' disabled></div>
+<input type="number" class="form-control" value='${myboard.viewCount}' disabled></div>
 <div class="form-floating">
-<textarea class="form-control" style="height:200px" name="content"><%=myboard.getContent()%></textarea></div>
+<textarea class="form-control" style="height:200px" name="content">${myboard.content}</textarea></div>
 <div class="col-12">
 <label for="formFile" class="form-label">image</label>
 <input class="form-control" type="file" id="formFile" name="file">

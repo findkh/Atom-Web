@@ -1,7 +1,7 @@
-<%@page import="com.hyun.myproject2.domain.myBoard"%>
-<%@page import="java.util.List"%>
+<%@ page import="com.hyun.myproject2.domain.myBoard"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +14,7 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/myboardindex.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-<title>My board2</title>
+<title>My board5</title>
 </head>
 <body>
 
@@ -35,38 +35,35 @@
 </tr>
 </thead>
 <tbody style="border: white">
-<%
-int pageNo = (int) request.getAttribute("pageNo");
-int pageSize = (int) request.getAttribute("pageSize");
-int totalPageSize = (int) request.getAttribute("totalPageSize");
-List<myBoard> boards = (List<myBoard>) request.getAttribute("list");
-for (myBoard board : boards) {
-%>
+
+<c:forEach var="myboard" items="${list}">
   <tr>
-    <td><%=board.getNo()%></td>
-    <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
-    <td><%=board.getWriter().getName()%></td>
-    <td><%=board.getViewCount()%></td>
-    <td><%=board.getCreatedDate() %></td>
+    <td>${myboard.no}</td>
+    <td><a href='detail?no=${pageScope.myboard.no}'>${myboard.title}</a></td>
+    <td>${myboard.writer.name}</td>
+    <td>${myboard.viewCount}</td>
+    <td>${myboard.createdDate}</td>
   </tr>
-<%
-}
-%>
+</c:forEach>
 </tbody>
 </table>
 <div class="pagination justify-content-center">
   <div class="list-group list-group-horizontal">
-    <%if (pageNo > 1) {%>
-    <li class="list-group-item list-group-item-success"><a href="list?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">&laquo;</a></li>
-    <%} else {%>
+  <c:if test="${pageNo > 1 }">
+    <li class="list-group-item list-group-item-success"><a href="list?pageNo=${pageNo-1}&pageSize=${pageSize}">&laquo;</a></li>
+  </c:if>
+  <c:if test="${pageNo <= 1 }">
     <li class="list-group-item list-group-item-success">&laquo;</li>
-    <%} %>
-    <li class="list-group-item list-group-item-success"><span><%=pageNo%></span></li>
-    <%if (pageNo < totalPageSize) {%>
-    <li class="list-group-item list-group-item-success"><a href="list?pageNo=<%=pageNo + 1%>&pageSize=<%=pageSize%>">&raquo;</a></li>
-    <%} else {%>
-    <li class="list-group-item list-group-item-success">&raquo;</li>
-    <%} %>
+  </c:if>
+    <li class="list-group-item list-group-item-success"><span>${pageNo}</span></li>
+  <c:choose>
+    <c:when test="${pageNo < totalPageSize}">
+      <li class="list-group-item list-group-item-success"><a href="list?pageNo=${pageNo+1}&pageSize=${pageSize}">&raquo;</a></li>
+    </c:when>
+    <c:otherwise>
+      <li class="list-group-item list-group-item-success">&raquo;</li>
+    </c:otherwise>
+  </c:choose>
   </div>
 </div>
 <div class="btnDiv">

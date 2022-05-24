@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    //JSTL API(JavaEE) + 구현체(apache.org) 라이브러리
+    implementation 'javax.servlet:jstl:1.2'
+
     // Servlet API 라이브러리
     // -> 컴파일할 떄만 사용하고, 배포할 때는 제외할 라이브러리
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
