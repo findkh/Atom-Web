@@ -2,15 +2,17 @@ package com.hyun.myproject2.controller.myboard;
 
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.hyun.myproject2.controller.Component;
-import com.hyun.myproject2.controller.RequestMapping;
-import com.hyun.myproject2.controller.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.hyun.myproject2.domain.Member;
 import com.hyun.myproject2.domain.myBoard;
 import com.hyun.myproject2.service.myBoardService;
 
-@Component
+@Controller
 @RequestMapping("/myboard/")
 public class myBoardController {
 
@@ -36,7 +38,7 @@ public class myBoardController {
 
     int myboardSize = myboardService.size();
     totalPageSize = myboardSize / pageSize;
-    if ((myboardSize % pageSize) > 0) {
+    if ((myboardSize % pageSize) > 0) { 
       totalPageSize++;
     }
 
@@ -100,25 +102,22 @@ public class myBoardController {
   }
 
   @RequestMapping("add")
-  public String add(
-      @RequestParam("title") String title, 
-      @RequestParam("content") String content,
-      HttpSession session) throws Exception{
+  public String add(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
     if (request.getMethod().equals("GET")) {
       return "/jsp/myboard/form.jsp";
 
-    } else {
-      myBoard myboard = new myBoard();
-      myboard.setTitle(title);
-      myboard.setContent(content);
-
-      Member loginUser = (Member) session.getAttribute("loginUser");
-      myboard.setWriter(loginUser);
-
-      myboardService.add(myboard);
-
-      return "redirect:list";
     }
+    myBoard myboard = new myBoard();
+    myboard.setTitle(request.getParameter("title"));
+    myboard.setContent(request.getParameter("content"));
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    myboard.setWriter(loginUser);
+
+    myboardService.add(myboard);
+
+    return "redirect:list";
+
   }
 }
